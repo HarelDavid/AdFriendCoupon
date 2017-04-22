@@ -15,7 +15,7 @@ let defaultState =  observable({
 
 
 // Export function that creates our server state
-export const createServerState = () => toJS(defaultState)
+export const createServerState = (coupon) => {coupon}
 
 // Export function that creates our client state
-export const createClientState = () => mergeObservables(defaultState, window.__STATE)
+export const createClientState = () => {return  window.__STATE}

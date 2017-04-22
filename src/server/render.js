@@ -12,22 +12,27 @@ import createRoutes from '../client/routes'
 
 // Get actions object
 import actions from '../client/actions'
+import admin from 'firebase-admin';
 
 // Handles page rendering ( for isomorphic / server-side-rendering too )
 //----------------------
 export default (req, res) => {
-    
-    // Create state to transfer
-    const state = createServerState()
-    
-    // Set host variable to header's host
-    state.app.host = req.headers.host
+
+	return admin.database().ref('/coupons/008178e3-6255-4f5e-8b02-cbc8ac31a086').once('value').then((snapshot) => {
+
+		var coupon  = snapshot.val();
+		return coupon;
+
+	})
+	.then((coupon) => {
+
 
     // Prepare for routing
     let matchRoutes = {
         routes : createRoutes(),
         location: req.originalUrl
     }
+		console.log("couponff",coupon)
 
     // Route
     match(matchRoutes, (error, redirectLocation, renderProps) => {
@@ -37,11 +42,13 @@ export default (req, res) => {
         
         let statusCode = renderProps.routes[1].path !== '*' ? 200 : 404 // Check for "Not Found" page ( in this case we have path "*" ) and use code 404 if that's the case
 
-        return fetchData(renderProps, state, actions).then(() => {
-            const content = ReactDOMServer.renderToStaticMarkup(<Provider state={state} actions={actions} ><Html><RouterContext {...renderProps}/></Html></Provider>)
+    //   return fetchData(renderProps, coupon, actions).then(() => {
+            const content = ReactDOMServer.renderToStaticMarkup(<Provider coupon={coupon} actions={actions} ><Html><RouterContext {...renderProps}/></Html></Provider>)
             return res.status(statusCode).send('<!DOCTYPE html>\n' + content)
-        }).catch((err) => {
-            res.status(400).send('400: An error has occured : ' + err)
-        })
+        //  }).catch((err) => {
+        //     res.status(400).send('400: An error has occured : ' + err)
+        // })
     })
+
+	})
 }

@@ -11,6 +11,7 @@ export default class Browse extends React.Component {
         return actions.test(state, parseInt(query.wait)) // see client/actions.js file, this basically returns a promise with a timeout
     }
     render() {
+
         return <section>
             <h1>Browse</h1>
             <p>This is delayed page example, executed on server and client alike</p>
