@@ -16,6 +16,7 @@ export default class Html extends React.Component {
         const isProd = process.env.NODE_ENV === 'production'
         const devServerURL = "http://"+state.host.replace(5400, 8080)
         
+console.log(coupon);
 
         let injected_state = 'window.__STATE = ' + JSON.stringify(coupon, null, isProd ? 0 : 4) + ';'
 
@@ -26,8 +27,13 @@ export default class Html extends React.Component {
                         <meta charSet="utf-8" />
                         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                         <meta name="viewport" content="width=device-width, initial-scale=1" />
-                        <meta name="description" content={"dd"} />
+                        <meta name="description" content={coupon.offer.description} />
                         <meta name="keywords" content={"dd"} />
+                        <meta property="og:title" content={coupon.offer.title} />
+                        <meta property="og:description" content={coupon.offer.description} />
+                        <meta property="og:url" content={coupon.link} />
+                        <meta property="og:image" content={coupon.offer.imageUrl} />
+
                         <link href={devServerURL + '/bundle.css'} rel="stylesheet"/>
                         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
                         <script dangerouslySetInnerHTML={{__html: injected_state}}/>
