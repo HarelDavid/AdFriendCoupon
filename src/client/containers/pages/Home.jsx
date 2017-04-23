@@ -9,6 +9,7 @@ import CouponModel from '../../models/CouponModel';
 import CouponStore from '../../stores/CouponStore';
 
 
+
 @observer(["coupon"]) // Only required if you use or change the state outside fetchData
 export default class Home extends React.Component {
 
