@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'mobx-react'
 import { Router, RouterContext, browserHistory } from 'react-router'
+import firebase from 'firebase';
 
 import { createClientState } from './state'
 import createRoutes from './routes'
@@ -13,6 +14,20 @@ import actions from './actions'
 
 // Import our styles
 require('./assets/css/index.scss')
+
+
+var configFirebase = {
+    apiKey: "AIzaSyDieUaSUVR8dTDTsWb-UVkCXzkAn04G9KE",
+    authDomain: "adfriend-73789.firebaseapp.com",
+    databaseURL: "https://adfriend-73789.firebaseio.com",
+    storageBucket: "adfriend-73789.appspot.com",
+    messagingSenderId: "640171697438"
+};
+firebase.initializeApp(configFirebase);
+
+
+
+
 
 // Initialize stores
 const coupon = createClientState()
