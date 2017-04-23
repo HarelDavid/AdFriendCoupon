@@ -21,7 +21,7 @@ export default class Home extends React.Component {
 	}
 
 	componentWillMount(){
-		debugger
+
 		var {coupon} = this.props;
 		this.state.couponModel = new CouponModel();
 		this.state.couponModel.store = new CouponStore();

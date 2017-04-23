@@ -18,7 +18,9 @@ import admin from 'firebase-admin';
 //----------------------
 export default (req, res) => {
 
-	return admin.database().ref('/coupons/008178e3-6255-4f5e-8b02-cbc8ac31a086').once('value').then((snapshot) => {
+	var couponId = req.originalUrl.split("coupon/")[1];
+
+	return admin.database().ref(`/coupons/${couponId}`).once('value').then((snapshot) => {
 
 		var coupon  = snapshot.val();
 		return coupon;
@@ -32,22 +34,23 @@ export default (req, res) => {
         routes : createRoutes(),
         location: req.originalUrl
     }
-		console.log("couponff",coupon)
 
     // Route
     match(matchRoutes, (error, redirectLocation, renderProps) => {
+
         if (error) return res.status(500).send(error.message)
         if (redirectLocation) return res.redirect(302, redirectLocation.pathname + redirectLocation.handleInput)
         if (!renderProps) return res.status(404).send('404 Not found')
         
         let statusCode = renderProps.routes[1].path !== '*' ? 200 : 404 // Check for "Not Found" page ( in this case we have path "*" ) and use code 404 if that's the case
 
-    //   return fetchData(renderProps, coupon, actions).then(() => {
+    	 return fetchData(renderProps, coupon, actions).then(() => {
+
             const content = ReactDOMServer.renderToStaticMarkup(<Provider coupon={coupon} actions={actions} ><Html><RouterContext {...renderProps}/></Html></Provider>)
             return res.status(statusCode).send('<!DOCTYPE html>\n' + content)
-        //  }).catch((err) => {
-        //     res.status(400).send('400: An error has occured : ' + err)
-        // })
+          }).catch((err) => {
+            res.status(400).send('400: An error has occured : ' + err)
+         })
     })
 
 	})
