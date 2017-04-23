@@ -19,6 +19,7 @@
     "body-parser": "^1.15.2",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "firebase": "^3.8.0",
     "firebase-admin": "^4.2.1",
     "material-ui": "^0.17.4",
     "mobx": "^2.5.2",
