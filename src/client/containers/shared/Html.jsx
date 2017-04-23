@@ -6,27 +6,18 @@ import { inject } from 'mobx-react'
 
 if (process.env.IS_CLIENT===true) throw "React Component <Html/> shouldn't be included in the client"
 
-@inject("coupon")
+@inject("coupon","state")
 export default class Html extends React.Component {
     render() {
         const coupon = this.props.coupon
+        const state = this.props.state
 
         // Setup devServerURL accordingly ( webpack dev server has a different port )
         const isProd = process.env.NODE_ENV === 'production'
-        const devServerURL = 'http://localhost:8080';//http://'+state.app.host.replace(5400, 8080)
+        const devServerURL = "http://"+state.host.replace(5400, 8080)
         
-        // // // Setup metadata
-        // // let metadata = {
-        // //     title: state.app.title,
-        // //     description: state.app.description,
-        // //     keywords: ""
-        // // }
-		//
-        // // Inject state ( used for mobx-connect )
-        // console.log(coupon)
-        let injected_state = 'window.__STATE = ' + JSON.stringify(coupon, null, isProd ? 0 : 4) + ';'
-        // console.log("coupon",coupon);
 
+        let injected_state = 'window.__STATE = ' + JSON.stringify(coupon, null, isProd ? 0 : 4) + ';'
 
 		/* eslint-disable react/no-danger */
         return (<html lang="">

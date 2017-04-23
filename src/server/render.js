@@ -27,8 +27,8 @@ export default (req, res) => {
 
 	})
 	.then((coupon) => {
-
-
+		var state = {};
+		 state.host = req.headers.host
     // Prepare for routing
     let matchRoutes = {
         routes : createRoutes(),
@@ -46,7 +46,7 @@ export default (req, res) => {
 
     	 return fetchData(renderProps, coupon, actions).then(() => {
 
-            const content = ReactDOMServer.renderToStaticMarkup(<Provider coupon={coupon} actions={actions} ><Html><RouterContext {...renderProps}/></Html></Provider>)
+            const content = ReactDOMServer.renderToStaticMarkup(<Provider state={state} coupon={coupon} actions={actions} ><Html><RouterContext {...renderProps}/></Html></Provider>)
             return res.status(statusCode).send('<!DOCTYPE html>\n' + content)
           }).catch((err) => {
             res.status(400).send('400: An error has occured : ' + err)
