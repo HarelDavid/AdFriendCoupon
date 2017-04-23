@@ -66,7 +66,7 @@ export default class Home extends React.Component {
                 <p>{coupon.offer.description}</p>
                 <p>בתוקף עד: {moment(coupon.endingDate).format('DD/MM/YYYY')}</p>
             </div>
-			{}
+
             <div>
 
             </div>
