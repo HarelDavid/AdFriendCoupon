@@ -25,9 +25,10 @@ export default class Html extends React.Component {
         // // Inject state ( used for mobx-connect )
         // console.log(coupon)
         let injected_state = 'window.__STATE = ' + JSON.stringify(coupon, null, isProd ? 0 : 4) + ';'
-        console.log("coupon",coupon)
+        // console.log("coupon",coupon);
 
-        /* eslint-disable react/no-danger */
+
+		/* eslint-disable react/no-danger */
         return (<html lang="">
                     <head>
                         <title>{coupon.offer.title}</title>

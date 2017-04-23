@@ -18,7 +18,9 @@ require('./assets/css/index.scss')
 const coupon = createClientState()
 
 // Setup autorun ( for document title change )
-autorun(coupon)
+autorun(coupon);
+
+
 
 // Wrap RouterContext with Provider for state transfer
 function createElement(props) {
@@ -27,22 +29,22 @@ function createElement(props) {
     </Provider>
 }
 
-// var ignoreFirstLoad = true
-// function onRouterUpdate() {
-//
-//     if (ignoreFirstLoad){
-//         ignoreFirstLoad=false
-//         return
-//     }
-//
-//     // Page changed, executing fetchData
-//     let params = this.state.params
-//     let query = this.state.location.query
-//
-//     this.state.components.filter(c => c.fetchData).forEach(c => {
-//         c.fetchData({ state, params, actions, query })
-//     })
-// }
+let ignoreFirstLoad = true;
+function onRouterUpdate() {
+
+    if (ignoreFirstLoad){
+        ignoreFirstLoad=false;
+        return
+    }
+
+    // Page changed, executing fetchData
+    let params = this.state.params;
+    let query = this.state.location.query;
+
+    this.state.components.filter(c => c.fetchData).forEach(c => {
+        c.fetchData({ state, params, actions, query })
+    })
+}
 
 
 // Render HTML on the browser
