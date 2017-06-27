@@ -9,12 +9,12 @@ if (process.env.IS_CLIENT===true) throw "React Component <Html/> shouldn't be in
 @inject("coupon","state")
 export default class Html extends React.Component {
     render() {
-        const coupon = this.props.coupon
-        const state = this.props.state
+		const coupon = this.props.coupon
+		const state = this.props.state
 
-        // Setup devServerURL accordingly ( webpack dev server has a different port )
-        const isProd = process.env.NODE_ENV === 'production'
-        const devServerURL = "http://"+state.host.replace(5400, 8080)
+		// Setup devServerURL accordingly ( webpack dev server has a different port )
+		const isProd = process.env.NODE_ENV === 'production'
+		const devServerURL = isProd ? '/public' : 'http://localhost:5400'
         
 console.log(coupon);
 
