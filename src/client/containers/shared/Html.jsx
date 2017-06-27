@@ -14,9 +14,9 @@ export default class Html extends React.Component {
 
         // Setup devServerURL accordingly ( webpack dev server has a different port )
         const isProd = process.env.NODE_ENV === 'production'
-        const devServerURL = "http://"+state.host.replace(5400, 8080)
-        
-console.log(coupon);
+        const devServerURL = isProd ? '/public' : 'http://localhost:5400'
+
+
 
         let injected_state = 'window.__STATE = ' + JSON.stringify(coupon, null, isProd ? 0 : 4) + ';'
 
