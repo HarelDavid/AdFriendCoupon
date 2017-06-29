@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "NODE_ENV=production node index.js"
   },
   "dependencies": {
     "autobind-decorator": "^1.4.0",
