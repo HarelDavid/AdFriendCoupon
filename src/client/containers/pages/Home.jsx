@@ -30,6 +30,12 @@ export default class Home extends React.Component {
 
 	}
 
+	componentDidMount(){
+		this.state.couponModel.watches++;
+		this.state.couponModel.save();
+
+	}
+
 	@autobind
 	realizeCoupon() {
 

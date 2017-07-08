@@ -15,7 +15,7 @@ export default class Html extends React.Component {
 		// Setup devServerURL accordingly ( webpack dev server has a different port )
 		const isProd = process.env.NODE_ENV === 'production'
 		const devServerURL = isProd ? '/public' : 'http://localhost:5400'
-        
+
 console.log(coupon);
 
         let injected_state = 'window.__STATE = ' + JSON.stringify(coupon, null, isProd ? 0 : 4) + ';'
@@ -37,10 +37,13 @@ console.log(coupon);
                         <link href={devServerURL + '/bundle.css'} rel="stylesheet"/>
                         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
                         <script dangerouslySetInnerHTML={{__html: injected_state}}/>
+
                     </head>
                     <body>
                         <div id="root">{this.props.children}</div>
                         <script src={devServerURL+'/bundle.js'} />
+
+
                     </body>
                 </html>)
     }
