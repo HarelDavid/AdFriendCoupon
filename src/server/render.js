@@ -36,7 +36,7 @@ export default (req, res) => {
     }
 
     // Route
-    match(matchRoutes, (error, redirectLocation, renderProps) => {
+    match(matchRoutes, (error, redirectLocation, renderProps)  => {
 
         if (error) return res.status(500).send(error.message)
         if (redirectLocation) return res.redirect(302, redirectLocation.pathname + redirectLocation.handleInput)
