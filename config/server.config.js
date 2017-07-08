@@ -3,7 +3,7 @@ const path = require('path')
 // Main server/app configuration
 module.exports = {
     http: {
-        port: 5400,
+        port: process.env.PORT || 5400,
         favicon: path.join(__dirname,'..', 'src/client/assets/favicon.ico'),
         robots: 'User-agent: *\nDisallow:',
         static: [

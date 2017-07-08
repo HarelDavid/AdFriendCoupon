@@ -1,5 +1,4 @@
 import { observable, toJS } from 'mobx'
-import mergeObservables from '../server/helpers/mergeObservables'
 
 // Default state structure
 let defaultState =  observable({
