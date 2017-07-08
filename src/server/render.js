@@ -34,6 +34,7 @@ export default (req, res) => {
         routes : createRoutes(),
         location: req.originalUrl
     }
+
     // Route
     match(matchRoutes, (error, redirectLocation, renderProps)  => {
 
