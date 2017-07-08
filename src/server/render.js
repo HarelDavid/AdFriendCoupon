@@ -40,7 +40,8 @@ export default (req, res) => {
         if (error) return res.status(500).send(error.message)
         if (redirectLocation) return res.redirect(302, redirectLocation.pathname + redirectLocation.handleInput)
         if (!renderProps) return res.status(404).send('404 Not found')
-        
+
+
         let statusCode = renderProps.routes[1].path !== '*' ? 200 : 404 // Check for "Not Found" page ( in this case we have path "*" ) and use code 404 if that's the case
 
     	 return fetchData(renderProps, coupon, actions).then(() => {
