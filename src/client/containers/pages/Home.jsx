@@ -2,6 +2,7 @@ import React from 'react'
 import {observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 import moment from 'moment';
+import Cookies from 'js-cookie'
 import autobind from 'autobind-decorator'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -21,18 +22,22 @@ export default class Home extends React.Component {
 		wrongCode: false
 	}
 
-	componentWillMount(){
+	componentWillMount() {
 
-		var {coupon} = this.props;
-		this.state.couponModel = new CouponModel();
-		this.state.couponModel.store = new CouponStore();
-		this.state.couponModel.convertFromDB(coupon);
-
-	}
+        var {coupon} = this.props;
+        this.state.couponModel = new CouponModel();
+        this.state.couponModel.store = new CouponStore();
+        this.state.couponModel.convertFromDB(coupon);
+    }
 
 	componentDidMount(){
-		this.state.couponModel.watches++;
-		this.state.couponModel.save();
+        var { couponModel } = this.state
+        if(!Cookies.get(`watched_${couponModel.id}`)) {
+            Cookies.set(`watched_${couponModel.id}`, true)
+            couponModel.watches++;
+            couponModel.save();
+        }
+
 
 	}
 
@@ -67,8 +72,12 @@ export default class Home extends React.Component {
     render() {
 
 		var {coupon} = this.props;
-		var {wrongCode, couponModel} = this.state;
-
+		var { wrongCode, couponModel } = this.state;
+		if( coupon.offer.endingDate <  moment().unix()) {
+            return <div className="Coupon">
+			 <div>expired</div>
+            </div>
+        }
 
         return <div className="Coupon">
             <div>

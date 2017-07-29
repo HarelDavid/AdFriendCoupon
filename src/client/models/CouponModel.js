@@ -9,11 +9,13 @@ export default class CouponModel {
 	@observable watches;
 	@observable link;
 	@observable realized;
+	@observable endingDate;
 
 
 
 	constructor(data){
 		if(data) {
+            console.log(data)
 			this.offer = data.offer || "";
 			this.offerId = data.offer ? data.offer.id :  "";
 			this.clientId = data.clientId || "";
@@ -22,13 +24,12 @@ export default class CouponModel {
 			this.store = data.store || {};
 			this.realized = data.realized || false;
 			this.friends = data.friends || [];
+
 		}
-
-
 	}
 
 	convertFromDB(couponDB) {
-
+		console.log(couponDB.offer)
 		this.offer = couponDB.offer;
 		this.clientId = couponDB.clientId;
 		this.offerId = couponDB.offerId;
@@ -43,7 +44,7 @@ export default class CouponModel {
 	}
 
 	convertToDB() {
-
+        console.log(couponDB.offer)
 		var couponDB = {}
 		couponDB.offer = this.offer || "";
 		couponDB.offerId = this.offer ? this.offer.id :  "";
@@ -71,7 +72,8 @@ export default class CouponModel {
 			title: this.title,
 			description: this.description,
 			imageUrl: this.imageUrl,
-			key: this.key
+			key: this.key,
+            endingData: this.endingDate
 		};
 	}
 
