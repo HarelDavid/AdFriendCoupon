@@ -75,7 +75,7 @@ export default class Home extends React.Component {
 		var { wrongCode, couponModel } = this.state;
 		if( coupon.offer.endingDate <  moment().unix()) {
             return <div className="Coupon">
-			 <div>expired</div>
+			 <div>פג התוקף של הקופון</div>
             </div>
         }
 
@@ -94,11 +94,9 @@ export default class Home extends React.Component {
 
                     <form>
                         <TextField name="clientName" onChange={this.onChange} hintText="שם"/>
-                        <TextField name="clientEmail" onChange={this.onChange} hintText="כתובת מייל"/>
-                        <TextField name="offerCode" onChange={this.checkCode} hintText="קוד קופון"/>
-						{wrongCode && <p>הקוד שגוי</p> }
+                        <TextField name="phoneNumber" onChange={this.onChange} hintText="מספר טלפון"/>
                         <div className="form-button">
-                            <RaisedButton secondary onClick={this.realizeCoupon}>ממש</RaisedButton>
+                            <RaisedButton secondary onClick={this.realizeCoupon}>שלח</RaisedButton>
                         </div>
                     </form>
 

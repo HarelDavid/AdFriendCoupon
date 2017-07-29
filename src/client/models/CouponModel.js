@@ -15,7 +15,6 @@ export default class CouponModel {
 
 	constructor(data){
 		if(data) {
-            console.log(data)
 			this.offer = data.offer || "";
 			this.offerId = data.offer ? data.offer.id :  "";
 			this.clientId = data.clientId || "";
@@ -29,7 +28,6 @@ export default class CouponModel {
 	}
 
 	convertFromDB(couponDB) {
-		console.log(couponDB.offer)
 		this.offer = couponDB.offer;
 		this.clientId = couponDB.clientId;
 		this.offerId = couponDB.offerId;
@@ -38,13 +36,13 @@ export default class CouponModel {
 		this.watches = couponDB.watches || 0;
 		this.realized = couponDB.realized || false;
 		this.friends = couponDB.friends || [];
+		this.bussineData = couponDB.bussineData || {};
 		this.id = couponDB.id;
 
 
 	}
 
 	convertToDB() {
-        console.log(couponDB.offer)
 		var couponDB = {}
 		couponDB.offer = this.offer || "";
 		couponDB.offerId = this.offer ? this.offer.id :  "";
@@ -73,7 +71,8 @@ export default class CouponModel {
 			description: this.description,
 			imageUrl: this.imageUrl,
 			key: this.key,
-            endingData: this.endingDate
+            endingData: this.endingDate,
+            offer: this.offer
 		};
 	}
 
