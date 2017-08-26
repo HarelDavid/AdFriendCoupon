@@ -45,7 +45,7 @@ export default class Home extends React.Component {
 	realizeCoupon() {
 
 		var {couponModel, clientData} = this.state;
-		couponModel.realized = true;
+		couponModel.realized++;
 		couponModel.friends.push(clientData)
 		couponModel.save()
 	}

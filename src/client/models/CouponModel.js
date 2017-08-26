@@ -21,7 +21,8 @@ export default class CouponModel {
 			this.businessId = data.businessId || "";
 			this.link = data.link || [];
 			this.store = data.store || {};
-			this.realized = data.realized || false;
+			this.realized = data.realized || 0;
+            this.watches = data.watches || 0;
 			this.friends = data.friends || [];
 
 		}
@@ -34,7 +35,7 @@ export default class CouponModel {
 		this.businessId = couponDB.businessId;
 		this.link = couponDB.link;
 		this.watches = couponDB.watches || 0;
-		this.realized = couponDB.realized || false;
+		this.realized = couponDB.realized || 0;
 		this.friends = couponDB.friends || [];
 		this.bussineData = couponDB.bussineData || {};
 		this.id = couponDB.id;
@@ -51,7 +52,7 @@ export default class CouponModel {
 		couponDB.link = this.link || "";
 		couponDB.id = this.id || "";
 		couponDB.watches = this.watches || 0;
-		couponDB.realized = this.realized || false;
+		couponDB.realized = this.realized || 0;
 		couponDB.friends = this.friends || [];
 		return couponDB;
 	}
