@@ -17,8 +17,8 @@ import admin from 'firebase-admin';
 // Handles page rendering ( for isomorphic / server-side-rendering too )
 //----------------------
 export default (req, res) => {
-
-	var couponId = req.originalUrl.split("coupon/")[1];
+    var urlOnly = req.originalUrl.split("?")[0];
+	var couponId = urlOnly.split("coupon/")[1];
 
 	return admin.database().ref(`/coupons/${couponId}`).once('value').then((snapshot) => {
 
