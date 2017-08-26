@@ -12,8 +12,6 @@ export default {
     // This test function is called from fetchData on Browse page, takes in state and time-to-wait, then after the delay it changes the state
     test: action(function(state, wait){
 
-        console.log("Action test")
-        
         // fetchData requires a Promise returned so that server knows it has to wait for a response before serving the page
         return new Promise((resolve)=>{
             setTimeout(() => {

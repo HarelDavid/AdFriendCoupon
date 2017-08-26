@@ -58,7 +58,6 @@ export default class CouponStore {
 
 	//add or update
 	save(coupon) {
-
 		if(!coupon.id){
 			var couponId = Utils.uuid();
 			coupon.id = couponId;

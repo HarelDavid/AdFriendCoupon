@@ -9,6 +9,7 @@ export default class CouponModel {
 	@observable watches;
 	@observable link;
 	@observable realized;
+	@observable endingDate;
 
 
 
@@ -20,30 +21,29 @@ export default class CouponModel {
 			this.businessId = data.businessId || "";
 			this.link = data.link || [];
 			this.store = data.store || {};
-			this.realized = data.realized || false;
+			this.realized = data.realized || 0;
+            this.watches = data.watches || 0;
 			this.friends = data.friends || [];
+
 		}
-
-
 	}
 
 	convertFromDB(couponDB) {
-
-		this.offer = couponDB.offer;
+		this.offer = couponDB.offer;gi
 		this.clientId = couponDB.clientId;
 		this.offerId = couponDB.offerId;
 		this.businessId = couponDB.businessId;
 		this.link = couponDB.link;
 		this.watches = couponDB.watches || 0;
-		this.realized = couponDB.realized || false;
+		this.realized = couponDB.realized || 0;
 		this.friends = couponDB.friends || [];
+		this.bussineData = couponDB.bussineData || {};
 		this.id = couponDB.id;
 
 
 	}
 
 	convertToDB() {
-
 		var couponDB = {}
 		couponDB.offer = this.offer || "";
 		couponDB.offerId = this.offer ? this.offer.id :  "";
@@ -52,7 +52,7 @@ export default class CouponModel {
 		couponDB.link = this.link || "";
 		couponDB.id = this.id || "";
 		couponDB.watches = this.watches || 0;
-		couponDB.realized = this.realized || false;
+		couponDB.realized = this.realized || 0;
 		couponDB.friends = this.friends || [];
 		return couponDB;
 	}
@@ -71,7 +71,9 @@ export default class CouponModel {
 			title: this.title,
 			description: this.description,
 			imageUrl: this.imageUrl,
-			key: this.key
+			key: this.key,
+            endingData: this.endingDate,
+            offer: this.offer
 		};
 	}
 
