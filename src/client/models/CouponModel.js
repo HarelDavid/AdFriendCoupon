@@ -29,7 +29,7 @@ export default class CouponModel {
 	}
 
 	convertFromDB(couponDB) {
-		this.offer = couponDB.offer;
+		this.offer = couponDB.offer;gi
 		this.clientId = couponDB.clientId;
 		this.offerId = couponDB.offerId;
 		this.businessId = couponDB.businessId;
