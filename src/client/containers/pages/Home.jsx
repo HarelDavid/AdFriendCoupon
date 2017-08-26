@@ -32,7 +32,8 @@ export default class Home extends React.Component {
 
 	componentDidMount(){
         var { couponModel } = this.state
-        if(!Cookies.get(`watched_${couponModel.id}`)) {
+        var isPreview = this.getParameterByName('preview')
+        if(!Cookies.get(`watched_${couponModel.id}`) && !isPreview) {
             Cookies.set(`watched_${couponModel.id}`, true)
             couponModel.watches++;
             couponModel.save();
@@ -40,6 +41,16 @@ export default class Home extends React.Component {
 
 
 	}
+
+    getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
 
 	@autobind
 	realizeCoupon() {
