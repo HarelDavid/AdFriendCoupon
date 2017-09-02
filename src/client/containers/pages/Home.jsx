@@ -84,36 +84,42 @@ export default class Home extends React.Component {
 
 		var {coupon} = this.props;
 		var { wrongCode, couponModel } = this.state;
-		if( coupon.offer.endingDate <  moment().unix()) {
+		var isOVerDue = moment(coupon.offer.endingDate).isBefore(new Date());
+		var telLink = 'tel:' + coupon.bussineData.phone
+
+		console.log(coupon)
+
+		if(isOVerDue) {
             return <div className="Coupon">
-			 <div>פג התוקף של הקופון</div>
+			 <p>ההצעה אינה בתוקף</p>
+				<p>ניתן לפנות ל{coupon.bussineData.title} לפרטים נוספים {coupon.bussineData.phone && <a href={telLink}>{coupon.bussineData.phone}</a>}</p>
             </div>
-        }
+        } else {
+			return <div className="Coupon">
+				<div>
+					<img src={couponModel.offer.imageUrl}/>
+					<h1>{couponModel.offer.title}</h1>
+					<p>{couponModel.offer.description}</p>
+					<p>בתוקף עד: {moment(coupon.offer.endingDate).format('DD/MM/YY')}</p>
+				</div>
 
-        return <div className="Coupon">
-            <div>
-                <img src={couponModel.offer.imageUrl}/>
-                <h1>{couponModel.offer.title}</h1>
-                <p>{couponModel.offer.description}</p>
-                <p>בתוקף עד: {moment(coupon.endingDate).format('DD/MM/YYYY')}</p>
-            </div>
+				<div>
 
-            <div>
+				</div>
+				<div className="Coupon-realization">
 
-            </div>
-            <div className="Coupon-realization">
-
-                    <form>
-                        <TextField name="clientName" onChange={this.onChange} hintText="שם"/>
-                        <TextField name="phoneNumber" onChange={this.onChange} hintText="מספר טלפון"/>
-                        <div className="form-button">
-                            <RaisedButton secondary onClick={this.realizeCoupon}>שלח</RaisedButton>
-                        </div>
-                    </form>
+					<form>
+						<TextField name="clientName" onChange={this.onChange} hintText="שם"/>
+						<TextField name="phoneNumber" onChange={this.onChange} hintText="מספר טלפון"/>
+						<div className="form-button">
+							<RaisedButton secondary onClick={this.realizeCoupon}>שלח</RaisedButton>
+						</div>
+					</form>
 
 
-            </div>
+				</div>
 
-        </div>
+			</div>
+		}
     }
 }
