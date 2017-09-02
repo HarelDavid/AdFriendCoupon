@@ -15,9 +15,9 @@ import actions from './actions'
 // Import our styles
 require('./assets/css/index.scss')
 const isProd = process.env.NODE_ENV === 'production'
+console.log("isProd" + isProd)
 var configFirebase;
-
- if ( !isProd ) {
+ if ( !isProd) {
     configFirebase = {
         apiKey: "AIzaSyDieUaSUVR8dTDTsWb-UVkCXzkAn04G9KE",
         authDomain: "adfriend-73789.firebaseapp.com",
@@ -27,7 +27,6 @@ var configFirebase;
     };
  }
  else {
-
     configFirebase  = {
         apiKey: "AIzaSyA9hrvUvs6uBVvO2ianh5IQQp7qFjQB4OY",
         authDomain: "adfriendprod.firebaseapp.com",

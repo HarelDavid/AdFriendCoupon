@@ -84,6 +84,7 @@ export default class Home extends React.Component {
 
 		var {coupon} = this.props;
 		var { wrongCode, couponModel } = this.state;
+        coupon.bussineData = coupon.bussineData || {}
 		var isOVerDue = moment(coupon.offer.endingDate).isBefore(new Date());
 		var telLink = 'tel:' + coupon.bussineData.phone
 
