@@ -99,12 +99,13 @@ export default class Home extends React.Component {
 			</div>
 		} else {
 			return <div className="Coupon">
+				<div className="Coupon-inner">
+				<img src={offer.imageUrl}/>
 				<div>
-					<img src={offer.imageUrl}/>
 					<h1>{offer.title}</h1>
 					<p>{offer.description}</p>
 					<p>בתוקף עד: {moment(offer.endingDate).format('DD/MM/YY')}</p>
-					<div className="terms">{offer.terms}</div>
+					<div className="terms">* {offer.terms}</div>
 				</div>
 
 				<div className="business-details">
@@ -130,7 +131,7 @@ export default class Home extends React.Component {
 
 
 				</div>
-
+				</div>
 			</div>
 		}
 	}

@@ -23,7 +23,8 @@ body,html {
     width: 100%;
     max-width: 500px;
     text-align: center;
-    background: #fff;
+    //background: repeating-linear-gradient(45deg, #f5f1ee 10px, #f5f1ee 20px, #585D91 20px, #585D91 30px);
+    background: white;
     border: 2px dashed #ccc;
     position: relative;
     font-size: 18px;
@@ -33,9 +34,15 @@ body,html {
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    > div {
-        padding: 10px;
+    border-radius: 7px;
+    box-shadow: 4px 4px 11px rgba(0,0,0,0.15);
+    .Coupon-inner {
+        background: white;
+        > div {
+            padding: 10px;
+        }
     }
+
     img {
         margin-bottom: 20px;
         max-width: 100%;
@@ -81,5 +88,7 @@ body,html {
     .terms {
         font-size: 10px;
         margin-top: 20px;
+        text-align: right;
+        padding-right: 5px;
     }
 }
