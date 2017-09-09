@@ -1,6 +1,8 @@
 
 * {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 body,html {
@@ -8,7 +10,7 @@ body,html {
     //font-family: $font-body;
     margin: 0;
     padding: 0;
-    background:#fafafa;
+    background:#f5f1ee;
     direction: rtl;
     color: #555
 }
@@ -54,5 +56,30 @@ body,html {
     }
     button {
         color: #fff;
+    }
+    p {
+        margin: 10px 0;
+    }
+    .business-details {
+        font-size: 14px;
+        line-height: 1;
+        width: 90%;
+        margin: 0 auto;
+        border: 1px #ccc dotted;
+        border-width: 1px 0 1px 0px;
+        .details-row {
+            margin-bottom: 15px;
+        }
+        p {
+            margin: 8px 0;
+            a {
+                color: #585D91
+            }
+        }
+    }
+
+    .terms {
+        font-size: 10px;
+        margin-top: 20px;
     }
 }
