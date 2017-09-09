@@ -63,8 +63,8 @@ export default class CouponStore {
 			coupon.id = couponId;
 			coupon.store = this;
 		}
-		debugger
-		var hostData = 'http://api.adfriend.co.il';
+
+		var hostData = 'http://coupon.adfriend.co.il';
 		var linkData = `/coupon/${coupon.id}`;
 		var couponsLink = `${hostData}${linkData}`;
 		coupon.link = couponsLink;
