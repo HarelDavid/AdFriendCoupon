@@ -2,54 +2,61 @@ const _ = require('lodash')
 const webpack = require('webpack')
 const config = require('./webpack.config.base.js')
 
-// Use port ( if you change this adapt code in Html.jsx as well )
-const dev_port = 8080
-
 // Merge with base configuration
 //-------------------------------
 _.merge(config, {
-    cache: true,
-    devtool: 'source-map',
-    entry: {
-        bundle: [
-            //'webpack/hot/dev-server',
-            'webpack-dev-server/client?http://localhost:8080/',
-            config.entry
-        ]
-    }
+	cache: false
 })
 
-// Setup webpack for DEV
+delete config.output.libraryTarget
+delete config.output.pathinfo
+
+// Save files to disk
 //-------------------------------
-const compiler = webpack(config)
-const compilerConfig = {
-    contentBase: 'build',
-    filename: 'bundle.js',
-    compress: true,
-    watchOptions: {
-        poll: true,
-        aggregateTimeout: 500,
-        ignore: /node_modules|data|build|\.git/
-    },
-    stats: {
-        colors: true,
-        version: false,
-        hash: false,
-        timings: false,
-        chunks: false,
-        chunkModules: false
-    }
+config.plugins.push(
+	new webpack.DefinePlugin({
+		'process.env.BLUEBIRD_WARNINGS': '0',
+		'process.env.NODE_ENV': JSON.stringify('production')
+	}),
+	new webpack.optimize.OccurrenceOrderPlugin(),
+	new webpack.optimize.DedupePlugin(),
+	new webpack.optimize.UglifyJsPlugin({
+		compressor: {
+			screw_ie8: true,
+			warnings: false
+		}
+	})
+)
+
+// Sanity checks
+//-------------------------------
+if (config.devtool === 'eval') {
+	throw new Error('webpack: using "eval" source-maps may break the build')
 }
 
-// Launch DEV server
+// Compile everything for PROD
 //-------------------------------
-console.info('webpack: running dev build...')
+console.info('webpack: running production build...')
 
-const WebpackDevServer = require('webpack-dev-server')
-const server = new WebpackDevServer(compiler, compilerConfig)
-server.listen(dev_port, function() {
-    console.info(`webpack: dev server running on port ${dev_port}`)
+const compiler = webpack(config)
+compiler.run(function(err, stats) {
+	if (err) throw err
+
+	// Output stats
+	console.log(stats.toString({
+		colors: true,
+		hash: false,
+		chunks: false,
+		version: false,
+		chunkModules: false
+	}))
+
+	if (stats.hasErrors()) {
+		console.warn('webpack: finished compiling webpack with errors...')
+		console.warn(stats.compilation.errors.toString())
+	} else {
+		console.info('webpack: finished compiling webpack')
+	}
 })
-
 
 module.exports = config

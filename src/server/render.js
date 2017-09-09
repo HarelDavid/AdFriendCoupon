@@ -21,7 +21,6 @@ export default (req, res) => {
 	var couponId = urlOnly.split("coupon/")[1];
 
 	return admin.database().ref(`/coupons/${couponId}`).once('value').then((snapshot) => {
-
 		var coupon  = snapshot.val();
 		return coupon;
 
