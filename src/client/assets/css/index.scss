@@ -1,94 +1,99 @@
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-body,html {
-    font-size: 14px;
-    //font-family: $font-body;
-    margin: 0;
-    padding: 0;
-    background:#f5f1ee;
-    direction: rtl;
-    color: #555
+body, html {
+  font-size: 14px;
+  //font-family: $font-body;
+  margin: 0;
+  padding: 0;
+  background: #f5f1ee;
+  direction: rtl;
+  color: #555;
 }
 
 #root {
-    padding: 15px;
+  padding: 15px;
 }
 
 .Coupon {
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-    //background: repeating-linear-gradient(45deg, #f5f1ee 10px, #f5f1ee 20px, #585D91 20px, #585D91 30px);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  //background: repeating-linear-gradient(45deg, #f5f1ee 10px, #f5f1ee 20px, #585D91 20px, #585D91 30px);
+  background: white;
+  border: 2px dashed #ccc;
+  position: relative;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 7px;
+  box-shadow: 4px 4px 11px rgba(0, 0, 0, 0.15);
+  .Coupon-inner {
     background: white;
-    border: 2px dashed #ccc;
-    position: relative;
-    font-size: 18px;
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    border-radius: 7px;
-    box-shadow: 4px 4px 11px rgba(0,0,0,0.15);
-    .Coupon-inner {
-        background: white;
-        > div {
-            padding: 10px;
-        }
+    > div {
+      padding: 10px;
     }
-
+  }
+  .Coupon-img {
+    max-width: 200px;
+    overflow: hidden;
     img {
-        margin-bottom: 20px;
-        max-width: 100%;
+      max-width: 100%;
     }
-    form {
-        > div {
-            width: 100% !important;
-        }
+  }
+  h1 {
+    font-size: 24px;
+  }
+  form {
+    > div {
+      width: 100% !important;
     }
-    .Coupon-realization {
-        width: 100%;
-        padding: 10px;
-        text-align: left;
+  }
+  .Coupon-realization {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
 
-    }
-    .form-button {
-        text-align: left;
-    }
-    button {
-        color: #fff;
+  }
+  .form-button {
+    text-align: left;
+  }
+  button {
+    color: #fff;
+  }
+  p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  .business-details {
+    font-size: 14px;
+    line-height: 1;
+    width: 90%;
+    margin: 0 auto;
+    border: 1px #ccc dotted;
+    border-width: 1px 0 1px 0px;
+    .details-row {
+      margin-bottom: 15px;
     }
     p {
-        margin: 10px 0;
+      margin: 8px 0;
+      a {
+        color: #585D91
+      }
     }
-    .business-details {
-        font-size: 14px;
-        line-height: 1;
-        width: 90%;
-        margin: 0 auto;
-        border: 1px #ccc dotted;
-        border-width: 1px 0 1px 0px;
-        .details-row {
-            margin-bottom: 15px;
-        }
-        p {
-            margin: 8px 0;
-            a {
-                color: #585D91
-            }
-        }
-    }
+  }
 
-    .terms {
-        font-size: 10px;
-        margin-top: 20px;
-        text-align: right;
-        padding-right: 5px;
-    }
+  .terms {
+    font-size: 10px;
+    margin-top: 20px;
+    text-align: right;
+    padding-right: 5px;
+  }
 }

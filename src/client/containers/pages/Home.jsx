@@ -73,9 +73,11 @@ export default class Home extends React.Component {
 	}
 
 	@autobind
-	checkCode(e) {
+	checkPhone(e) {
 		var {couponModel} = this.state;
-		if (e.target.value !== couponModel.offer.code) {
+		var reg = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+		debugger
+		if (!reg.check(e.target.value)) {
 			this.state.wrongCode = true;
 		}
 	}
@@ -100,7 +102,9 @@ export default class Home extends React.Component {
 		} else {
 			return <div className="Coupon">
 				<div className="Coupon-inner">
-				<img src={offer.imageUrl}/>
+					<div className="Coupon-img">
+						<img src={offer.imageUrl}/>
+					</div>
 				<div>
 					<h1>{offer.title}</h1>
 					<p>{offer.description}</p>
@@ -123,7 +127,8 @@ export default class Home extends React.Component {
 
 					<form>
 						<TextField name="clientName" onChange={this.onChange} hintText="שם"/>
-						<TextField name="phoneNumber" onChange={this.onChange} hintText="מספר טלפון"/>
+						<TextField name="phoneNumber" onChange={this.onChange} onBlur={this.checkPhone} hintText="מספר טלפון"/>
+						{wrongCode && <div>מספר טלפון לא תקין</div> }
 						<div className="form-button">
 							<RaisedButton secondary onClick={this.realizeCoupon}>שלח</RaisedButton>
 						</div>
