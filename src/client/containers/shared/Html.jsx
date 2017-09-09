@@ -32,7 +32,7 @@ export default class Html extends React.Component {
                         <meta property="og:description" content={coupon.offer.description} />
                         <meta property="og:url" content={coupon.link} />
                         <meta property="og:image" content={coupon.offer.imageUrl} />
-                        <meta name="google-site-verification" content="ZH11ycVDfjSEHE8MTaeRa5fnGkRTE0L0iEXlWFp78So" />
+                        <meta name="google-site-verification" content="hY_sgqpJL9GEXDQSwGV5TOasEVKWf5-l7DnqnveJO9o" />
                         <link href={devServerURL + '/bundle.css'} rel="stylesheet"/>
                         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
                         <script dangerouslySetInnerHTML={{__html: injected_state}}/>
