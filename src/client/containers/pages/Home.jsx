@@ -75,11 +75,6 @@ export default class Home extends React.Component {
 	@autobind
 	checkPhone(e) {
 		var {couponModel} = this.state;
-		var reg = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
-		debugger
-		if (!reg.check(e.target.value)) {
-			this.state.wrongCode = true;
-		}
 	}
 
 	render() {
@@ -92,6 +87,9 @@ export default class Home extends React.Component {
 		console.log(this.props.coupon)
 		console.log(couponModel);
 
+		if(!couponModel) {
+			return null;
+		}
 
 		if (isOVerDue) {
 			return <div className="Coupon">
@@ -119,7 +117,7 @@ export default class Home extends React.Component {
 						<p>{business.address}</p>
 					</div>
 					<div className="details-row">
-						<p>{business.phone}</p>
+						<p><a href={telLink}>{business.phone}</a></p>
 						<p><a href={business.website} target="_blank">{business.website}</a></p>
 					</div>
 				</div>
