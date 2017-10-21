@@ -82,10 +82,12 @@ export default class Home extends React.Component {
         var valid = true
        const phone =  this.state.clientData['phoneNumber'];
        if(!phone.trim()){
+       	console.log("hone.trim()",phone.trim())
            this.state.phoneError = 'no phone'
            valid =  false
 	   }
        if(!phone.match(/^((\+972|972)|0)( |-)?([1-468-9]( |-)?\d{7}|(5|7)[0-9]( |-)?\d{7})$/)){
+           console.log("wrong phone",phone.trim())
 		 this.state.phoneError = 'wrong phone'
            valid =  false
 	   }
