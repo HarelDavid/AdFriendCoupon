@@ -71,7 +71,7 @@ export default class CouponStore {
 	}
 
 
-    saveRealizations(clientData){
+    saveRealizations(coupon, clientData){
         var couponDB = coupon.convertToDB();
         return this.getCoupon(couponDB.id).then((coupon) => {
             coupon.friends.push(clientData)
@@ -84,7 +84,7 @@ export default class CouponStore {
         // firebase.database().ref('coupons').child(couponDB.id).child('realized').set(couponDB.realized)
     }
 
-    saveWatches(){
+    saveWatches(coupon){
         var couponDB = coupon.convertToDB();
         return this.getCoupon(couponDB.id).then((coupon) => {
             firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches++)
