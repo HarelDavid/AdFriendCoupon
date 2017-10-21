@@ -94,8 +94,11 @@ export default class Home extends React.Component {
 
 	validateForm(){
 		let valid = true
+        console.log("1",valid)
         valid  && this.validatePhone()
+        console.log("2_phone",valid)
         valid  && this.validateName()
+        console.log("3_name",valid)
 		return valid
 	}
 
