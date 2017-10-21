@@ -73,6 +73,7 @@ export default class Home extends React.Component {
             this.state.clientNameError = 'no client name'
 			return false
 		}
+		return true
     }
 
     @autobind
