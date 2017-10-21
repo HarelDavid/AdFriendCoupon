@@ -59,9 +59,9 @@ export default class Home extends React.Component {
 		couponModel.realized++;
 		couponModel.friends.push(clientData)
 		return couponModel.save()
-		.then(() => {
+		//.then(() => {
             browserHistory.push("thank-you")
-        })
+        //})
 	}
 
 
