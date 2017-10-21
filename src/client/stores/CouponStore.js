@@ -62,7 +62,7 @@ export default class CouponStore {
     	return Promise.all([
     		firebase.database().ref('coupons').child(couponDB.id).child('realized').set(couponDB.realized),
             firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches),
-            firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.friends)
+            firebase.database().ref('coupons').child(couponDB.id).child('friends').set(couponDB.friends)
 		])
 	}
 
