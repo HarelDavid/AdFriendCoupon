@@ -4,6 +4,7 @@ import {observer} from 'mobx-react'
 import moment from 'moment';
 import Cookies from 'js-cookie'
 import autobind from 'autobind-decorator'
+import { browserHistory } from 'react-router'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import CouponModel from '../../models/CouponModel';
@@ -57,7 +58,10 @@ export default class Home extends React.Component {
 		var {couponModel, clientData} = this.state;
 		couponModel.realized++;
 		couponModel.friends.push(clientData)
-		couponModel.save()
+		return couponModel.save()
+		.then(() => {
+            browserHistory.push("thank-you")
+        })
 	}
 
 
