@@ -72,24 +72,18 @@ export default class CouponStore {
 
 
     saveRealizations(coupon, clientData){
-        var couponDB = coupon.convertToDB();
         return this.getCoupon(couponDB.id).then((coupon) => {
             coupon.friends.push(clientData)
             coupon.realized++
-            firebase.database().ref('coupons').child(couponDB.id).child('friends').set(coupon.friends)
-            firebase.database().ref('coupons').child(couponDB.id).child('realized').set(coupon.realized)
+            firebase.database().ref('coupons').child(coupon.id).child('friends').set(coupon.friends)
+            firebase.database().ref('coupons').child(coupon.id).child('realized').set(coupon.realized)
 		})
-        // var phone = clientData.phoneNumber
-        // firebase.database().ref('coupons').child(couponDB.id).child('friends').child(phone).set(clientData)
-        // firebase.database().ref('coupons').child(couponDB.id).child('realized').set(couponDB.realized)
     }
 
     saveWatches(coupon){
-        var couponDB = coupon.convertToDB();
-        return this.getCoupon(couponDB.id).then((coupon) => {
-            firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches++)
+        return this.getCoupon(coupon.id).then((coupon) => {
+            firebase.database().ref('coupons').child(coupon.id).child('watches').set(coupon.watches++)
         })
-        //firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches)
     }
 
 
