@@ -172,8 +172,9 @@ export default class Home extends React.Component {
 
 
 				</div>
-				</div>}
-				{thankYouMode && <div className="Coupon">
+
+				</div>
+                {thankYouMode && <div className="Coupon">
 					<div className="Coupon-inner">
 						<div>
 							<h1>תודה רבה</h1>
@@ -182,7 +183,8 @@ export default class Home extends React.Component {
 						</div>
 					</div>
 				</div>}
-			</div>
-		}
+				</div>}
+
+
 	}
 }
