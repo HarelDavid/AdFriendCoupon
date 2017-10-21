@@ -64,7 +64,7 @@ export default class Home extends React.Component {
             couponModel.friends.push({
                 clientName:clientData.clientName,
                 phoneNumber:clientData.phoneNumber
-            },)
+            })
             couponModel.save()
         	browserHistory.push("/thank-you")
 
