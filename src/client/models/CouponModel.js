@@ -60,7 +60,7 @@ export default class CouponModel {
 	}
 
 	save(){
-		this.store.save(this);
+		return this.store.save(this);
 	}
 
 	destroy() {
