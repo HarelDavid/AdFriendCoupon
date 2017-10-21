@@ -58,8 +58,10 @@ export default class Home extends React.Component {
 		var {couponModel, clientData} = this.state;
 		couponModel.realized++;
 		couponModel.friends.push(clientData)
-		return couponModel.save()
+		console.log('s')
+		couponModel.save()
 		//.then(() => {
+        console.log('p')
             browserHistory.push("thank-you")
         //})
 	}
