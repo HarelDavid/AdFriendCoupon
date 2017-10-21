@@ -59,28 +59,37 @@ export default class CouponStore {
 	//add or update
 	save(coupon) {
 		var couponDB = coupon.convertToDB();
-    	return Promise.all([
-    		firebase.database().ref('coupons').child(couponDB.id).child('realized').set(couponDB.realized),
-            firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches),
-            firebase.database().ref('coupons').child(couponDB.id).child('friends').set(couponDB.friends)
-		])
+        firebase.database().ref('coupons').child(couponDB.id)
+        return getCoupon(couponDB.id)
+			.then(() => {
+				return Promise.all([
+					firebase.database().ref('coupons').child(couponDB.id).child('realized').set(couponDB.realized),
+					firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches),
+					firebase.database().ref('coupons').child(couponDB.id).child('friends').set(couponDB.friends)
+				])
+            })
 	}
 
 
     saveRealizations(clientData){
         var couponDB = coupon.convertToDB();
-        var phone = clientData.phoneNumber
-        return Promise.all([
-            firebase.database().ref('coupons').child(couponDB.id).child('realized').set(couponDB.realized),
-            firebase.database().ref('coupons').child(couponDB.id).child('friends').child(phone).set(clientData)
-        ])
+        return this.getCoupon(couponDB.id).then((coupon) => {
+            coupon.friends.push(clientData)
+            coupon.realized++
+            firebase.database().ref('coupons').child(couponDB.id).child('friends').set(coupon.friends)
+            firebase.database().ref('coupons').child(couponDB.id).child('realized').set(coupon.realized)
+		})
+        // var phone = clientData.phoneNumber
+        // firebase.database().ref('coupons').child(couponDB.id).child('friends').child(phone).set(clientData)
+        // firebase.database().ref('coupons').child(couponDB.id).child('realized').set(couponDB.realized)
     }
 
     saveWatches(){
         var couponDB = coupon.convertToDB();
-        return Promise.all([
-            firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches)
-        ])
+        return this.getCoupon(couponDB.id).then((coupon) => {
+            firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches++)
+        })
+        //firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches)
     }
 
 
