@@ -44,7 +44,7 @@ export default class CouponModel {
 
 	}
 
-	convertToDB() {
+	convertToDB(){
 		var couponDB = {}
 		couponDB.offer = this.offer || "";
 		couponDB.offerId = this.offer ? this.offer.id :  "";
