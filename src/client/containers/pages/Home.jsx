@@ -105,10 +105,6 @@ export default class Home extends React.Component {
 		clientData[key] = value;
 	}
 
-	@autobind
-	validatePhone(e) {
-		var {couponModel} = this.state;
-	}
 
 	render() {
 		var {wrongCode, couponModel} = this.state,
