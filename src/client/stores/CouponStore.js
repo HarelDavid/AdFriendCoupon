@@ -72,7 +72,7 @@ export default class CouponStore {
 
 
     saveRealizations(coupon, clientData){
-        return this.getCoupon(couponDB.id).then((coupon) => {
+        return this.getCoupon(coupon.id).then((coupon) => {
             coupon.friends.push(clientData)
             coupon.realized++
             firebase.database().ref('coupons').child(coupon.id).child('friends').set(coupon.friends)
