@@ -82,7 +82,8 @@ export default class CouponStore {
 
     saveWatches(coupon){
         return this.getCoupon(coupon.id).then((coupon) => {
-            firebase.database().ref('coupons').child(coupon.id).child('watches').set(coupon.watches++)
+            coupon.watches++
+            firebase.database().ref('coupons').child(coupon.id).child('watches').set(coupon.watches)
         })
     }
 
