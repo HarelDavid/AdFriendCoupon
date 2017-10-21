@@ -69,25 +69,27 @@ export default class Home extends React.Component {
 
     @autobind
     validateName() {
+		let valid = true
 		if(!this.state.clientData['clientName'].trim()){
             this.state.clientNameError = 'no client name'
-			return false
+            valid =  false
 		}
-		return true
+		return valid
     }
 
     @autobind
     validatePhone() {
+        let valid = true
        const phone =  this.state.clientData['phoneNumber'];
        if(!phone.trim()){
            this.state.phoneError = 'no phone'
-           return false
+           valid =  false
 	   }
        if(!phone.match(/^((\+972|972)|0)( |-)?([1-468-9]( |-)?\d{7}|(5|7)[0-9]( |-)?\d{7})$/)){
 		 this.state.phoneError = 'wrong phone'
-         return false
+           valid =  false
 	   }
-       return true
+        return valid
 	}
 
 	validateForm(){
