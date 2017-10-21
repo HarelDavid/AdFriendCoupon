@@ -18,7 +18,6 @@ export default class Home extends React.Component {
 	state = {
 		couponModel: null,
 		formOpen: false,
-        thankYouMode: false,
 		clientData: {
             clientName:'',
             phoneNumber:''
@@ -62,12 +61,13 @@ export default class Home extends React.Component {
         var {couponModel, clientData} = this.state;
 		if(this.validateForm()) {
             couponModel.realized++;
-            couponModel.friends.push(clientData)
+            couponModel.friends.push({
+                clientName:clientData.clientName,
+                phoneNumber:clientData.phoneNumber
+            },)
             couponModel.save()
-			this.state.thankYouMode = true
-                // .then(() => {
-        		 //    browserHistory.push("/thank-you")
-                // })
+        	browserHistory.push("/thank-you")
+
         }
 	}
 
@@ -117,24 +117,26 @@ export default class Home extends React.Component {
 
 
 	render() {
-		var { couponModel, clientNameError, phoneError, thankYouMode} = this.state,
+		var { couponModel, clientNameError, phoneError} = this.state,
 			business = couponModel.bussineData || {},
 			offer = couponModel.offer,
 			isOVerDue = moment(couponModel.offer.endingDate).isBefore(new Date()),
 			telLink = 'tel:' + business.phone
 
+		console.log(this.props.coupon)
+		console.log(couponModel);
 
 		if(!couponModel) {
 			return null;
 		}
 
-		if (isOVerDue && !thankYouMode ) {
+		if (isOVerDue) {
 			return <div className="Coupon">
 				<p>ההצעה אינה בתוקף</p>
 				<p>ניתן לפנות ל{business.title} לפרטים נוספים {business.phone &&
 				<a href={telLink}>{business.phone}</a>}</p>
 			</div>
-		} else if(!thankYouMode) {
+		} else {
 			return <div className="Coupon">
 				<div className="Coupon-inner">
 					<div className="Coupon-img">
@@ -172,19 +174,8 @@ export default class Home extends React.Component {
 
 
 				</div>
-
 				</div>
-                {thankYouMode && <div className="Coupon">
-					<div className="Coupon-inner">
-						<div>
-							<h1>תודה רבה</h1>
-							<p>נציגינו יצרו איתך קשר בהקדם</p>
-
-						</div>
-					</div>
-				</div>}
-				</div>}
-
-
+			</div>
+		}
 	}
 }
