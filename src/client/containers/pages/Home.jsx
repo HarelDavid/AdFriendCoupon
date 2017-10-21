@@ -18,7 +18,10 @@ export default class Home extends React.Component {
 	state = {
 		couponModel: null,
 		formOpen: false,
-		clientData: {},
+		clientData: {
+            clientName:'',
+            phoneNumber:''
+		},
         clientNameError: '',
         phoneError: ''
 	}
