@@ -67,6 +67,22 @@ export default class CouponStore {
 	}
 
 
+    saveRealizations(clientData){
+        var couponDB = coupon.convertToDB();
+        var phone = clientData.phoneNumber
+        return Promise.all([
+            firebase.database().ref('coupons').child(couponDB.id).child('realized').set(couponDB.realized),
+            firebase.database().ref('coupons').child(couponDB.id).child('friends').set({phone : clientData })
+        ])
+    }
+
+    saveWatches(){
+        var couponDB = coupon.convertToDB();
+        return Promise.all([
+            firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches)
+        ])
+    }
+
 
 	toJS() {
 		return this.coupons.map(offer => offer.toJS());

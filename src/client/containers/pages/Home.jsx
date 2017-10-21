@@ -40,7 +40,7 @@ export default class Home extends React.Component {
 		if (!Cookies.get(`watched_${couponModel.id}`) && !isPreview) {
 			Cookies.set(`watched_${couponModel.id}`, true)
 			couponModel.watches++;
-			couponModel.save();
+			couponModel.saveWatches();
 		}
 
 
@@ -61,11 +61,14 @@ export default class Home extends React.Component {
         var {couponModel, clientData} = this.state;
 		if(this.validateForm()) {
             couponModel.realized++;
-            couponModel.friends.push({
+            // couponModel.friends.push({
+            //     clientName:clientData.clientName,
+            //     phoneNumber:clientData.phoneNumber
+            // })
+            couponModel.saveRealizations({
                 clientName:clientData.clientName,
                 phoneNumber:clientData.phoneNumber
-            })
-            couponModel.save()
+            });
         	browserHistory.push("/thank-you")
 
         }

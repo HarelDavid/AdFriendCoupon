@@ -64,6 +64,14 @@ export default class CouponModel {
 		return this.store.save(this);
 	}
 
+    saveRealizations(clientData){
+        return this.store.saveRealizations(this, clientData);
+	}
+
+    saveWatches(){
+        return this.store.saveWatches(this);
+    }
+
 	destroy() {
 		this.store.remove(this);
 	}
