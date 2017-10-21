@@ -60,6 +60,7 @@ export default class Home extends React.Component {
 	realizeCoupon() {
         var {couponModel, clientData} = this.state;
 		if(this.validateForm()) {
+
             couponModel.realized++;
             couponModel.friends.push({
                 clientName:clientData.clientName,
