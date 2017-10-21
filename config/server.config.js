@@ -14,8 +14,8 @@ module.exports = {
     },
     webpack:{
         dev_port: 8080
-    },
-    db: {
-        mongo: 'mongodb://localhost/test'
     }
+    // db: {
+    //     mongo: 'mongodb://localhost/test'
+    // }
 }
