@@ -19,7 +19,8 @@ export default class Home extends React.Component {
 		couponModel: null,
 		formOpen: false,
 		clientData: {},
-		wrongCode: false
+        clientNameError: '',
+        phoneError: ''
 	}
 
 	componentWillMount() {
@@ -54,16 +55,40 @@ export default class Home extends React.Component {
 
 	@autobind
 	realizeCoupon() {
-
-		var {couponModel, clientData} = this.state;
-		couponModel.realized++;
-		couponModel.friends.push(clientData)
-		console.log('s')
-		couponModel.save()
-		//.then(() => {
-        console.log('p')
+		if(this.validateForm()) {
+            var {couponModel, clientData} = this.state;
+            couponModel.realized++;
+            couponModel.friends.push(clientData)
+            couponModel.save()
             browserHistory.push("thank-you")
-        //})
+        }
+	}
+
+    validateName() {
+		if(!this.state.clientData['clientName'].trim()){
+            this.state.clientNameError = 'no client name'
+			return false
+		}
+    }
+
+    validatePhone() {
+       const phone =  this.state.clientData['phoneNumber'];
+       if(!phone.trim()){
+           this.state.phoneError = 'no phone'
+           return false
+	   }
+       if(!phone.match(/^((\+972|972)|0)( |-)?([1-468-9]( |-)?\d{7}|(5|7)[0-9]( |-)?\d{7})$/)){
+		 this.state.phoneError = 'wrong phone'
+         return false
+	   }
+       return true
+	}
+
+	validateForm(){
+		let valid = true
+        valid  && this.validatePhone()
+        valid  && this.validateName()
+		return valid
 	}
 
 
@@ -79,7 +104,7 @@ export default class Home extends React.Component {
 	}
 
 	@autobind
-	checkPhone(e) {
+	validatePhone(e) {
 		var {couponModel} = this.state;
 	}
 
@@ -130,9 +155,10 @@ export default class Home extends React.Component {
 				<div className="Coupon-realization">
 
 					<form>
-						<TextField name="clientName" onChange={this.onChange} hintText="שם"/>
-						<TextField name="phoneNumber" onChange={this.onChange} onBlur={this.checkPhone} hintText="מספר טלפון"/>
-						{wrongCode && <div>מספר טלפון לא תקין</div> }
+						<TextField name="clientName" onChange={this.onChange} onFocus={() => {this.state.clientNameError = ''}} onBlur={this.validateName}  hintText="שם"/>
+						<div>{clientNameError}</div>
+						<TextField name="phoneNumber" onChange={this.onChange} onFocus={() => {this.state.phoneError = ''}}  onBlur={this.validatePhone} hintText="מספר טלפון"/>
+						 <div>{phoneError}</div>
 						<div className="form-button">
 							<RaisedButton secondary onClick={this.realizeCoupon}>שלח</RaisedButton>
 						</div>
