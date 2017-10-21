@@ -61,7 +61,8 @@ export default class CouponStore {
 		var couponDB = coupon.convertToDB();
     	return Promise.all([
     		firebase.database().ref('coupons').child(couponDB.id).child('realized').set(couponDB.realized),
-            firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches)
+            firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches),
+            firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.friends)
 		])
 	}
 
