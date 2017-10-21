@@ -71,7 +71,7 @@ export default class Home extends React.Component {
     validateName() {
         var valid = true
 		if(!this.state.clientData['clientName'].trim()){
-            this.state.clientNameError = 'no client name'
+            this.state.clientNameError = 'הזן שם'
             valid =  false
 		}
 		return valid
@@ -82,13 +82,11 @@ export default class Home extends React.Component {
         var valid = true
        const phone =  this.state.clientData['phoneNumber'];
        if(!phone.trim()){
-       	console.log("hone.trim()",phone.trim())
-           this.state.phoneError = 'no phone'
+           this.state.phoneError = 'הזן מספר טלפון'
            valid =  false
 	   }
        if(!phone.match(/^((\+972|972)|0)( |-)?([1-468-9]( |-)?\d{7}|(5|7)[0-9]( |-)?\d{7})$/)){
-           console.log("wrong phone",phone.trim())
-		 this.state.phoneError = 'wrong phone'
+		   this.state.phoneError = 'מספר הטלפון שגוי'
            valid =  false
 	   }
         return valid
@@ -96,11 +94,8 @@ export default class Home extends React.Component {
 
 	validateForm(){
         var valid = true
-        console.log("1",valid)
-        valid  && this.validatePhone()
-        console.log("2_phone",valid)
-        valid  && this.validateName()
-        console.log("3_name",valid)
+        valid = valid  && this.validatePhone()
+        valid = valid  && this.validateName()
 		return valid
 	}
 
