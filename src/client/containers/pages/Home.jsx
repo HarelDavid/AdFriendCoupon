@@ -107,7 +107,7 @@ export default class Home extends React.Component {
 
 
 	render() {
-		var {wrongCode, couponModel} = this.state,
+		var { couponModel, clientNameError, phoneError} = this.state,
 			business = couponModel.bussineData || {},
 			offer = couponModel.offer,
 			isOVerDue = moment(couponModel.offer.endingDate).isBefore(new Date()),
