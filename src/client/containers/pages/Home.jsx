@@ -64,6 +64,7 @@ export default class Home extends React.Component {
         }
 	}
 
+    @autobind
     validateName() {
 		if(!this.state.clientData['clientName'].trim()){
             this.state.clientNameError = 'no client name'
@@ -71,6 +72,7 @@ export default class Home extends React.Component {
 		}
     }
 
+    @autobind
     validatePhone() {
        const phone =  this.state.clientData['phoneNumber'];
        if(!phone.trim()){
