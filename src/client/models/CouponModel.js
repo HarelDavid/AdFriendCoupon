@@ -24,6 +24,7 @@ export default class CouponModel {
 			this.realized = data.realized || 0;
             this.watches = data.watches || 0;
 			this.friends = data.friends || [];
+            this.bussineData = data.bussineData || {};
 
 		}
 	}
@@ -54,6 +55,7 @@ export default class CouponModel {
 		couponDB.watches = this.watches || 0;
 		couponDB.realized = this.realized || 0;
 		couponDB.friends = this.friends || [];
+        couponDB.bussineData  = this.bussineData || {};
 		return couponDB;
 	}
 
