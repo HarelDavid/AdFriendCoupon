@@ -69,7 +69,7 @@ export default class Home extends React.Component {
 
     @autobind
     validateName() {
-		let valid = true
+        var valid = true
 		if(!this.state.clientData['clientName'].trim()){
             this.state.clientNameError = 'no client name'
             valid =  false
@@ -79,7 +79,7 @@ export default class Home extends React.Component {
 
     @autobind
     validatePhone() {
-        let valid = true
+        var valid = true
        const phone =  this.state.clientData['phoneNumber'];
        if(!phone.trim()){
            this.state.phoneError = 'no phone'
@@ -93,7 +93,7 @@ export default class Home extends React.Component {
 	}
 
 	validateForm(){
-		let valid = true
+        var valid = true
         console.log("1",valid)
         valid  && this.validatePhone()
         console.log("2_phone",valid)
