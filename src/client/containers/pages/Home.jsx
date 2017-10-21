@@ -128,13 +128,13 @@ export default class Home extends React.Component {
 			return null;
 		}
 
-		if (isOVerDue) {
+		if (isOVerDue && !thankYouMode ) {
 			return <div className="Coupon">
 				<p>ההצעה אינה בתוקף</p>
 				<p>ניתן לפנות ל{business.title} לפרטים נוספים {business.phone &&
 				<a href={telLink}>{business.phone}</a>}</p>
 			</div>
-		} else {
+		} else if(!thankYouMode) {
 			return <div className="Coupon">
 				<div className="Coupon-inner">
 					<div className="Coupon-img">
@@ -172,7 +172,7 @@ export default class Home extends React.Component {
 
 
 				</div>
-				</div>
+				</div>}
 				{thankYouMode && <div className="Coupon">
 					<div className="Coupon-inner">
 						<div>
