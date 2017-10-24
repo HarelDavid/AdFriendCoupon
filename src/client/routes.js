@@ -22,6 +22,7 @@ function requireAsync(main) {
 export default function createRoutes() {
     return (<Route component={App}>
                 <Route path="coupon/:couponId"      getComponent={requireAsync('Home')}/>
+                <Route path="thank-you"      getComponent={requireAsync('ThankYou')}/>
                 <Route path="*"      getComponent={requireAsync('NotFound')}/>
             </Route>)
 }

@@ -14,18 +14,18 @@ delete config.output.pathinfo
 // Save files to disk
 //-------------------------------
 config.plugins.push(
-new webpack.DefinePlugin({
-    'process.env.BLUEBIRD_WARNINGS': '0',
-    'process.env.NODE_ENV': JSON.stringify('production')
-}),
-new webpack.optimize.OccurrenceOrderPlugin(),
-new webpack.optimize.DedupePlugin(),
-new webpack.optimize.UglifyJsPlugin({
-    compressor: {
-        screw_ie8: true,
-        warnings: false
-    }
-})
+    new webpack.DefinePlugin({
+        'process.env.BLUEBIRD_WARNINGS': '0',
+        'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+        compressor: {
+            screw_ie8: true,
+            warnings: false
+        }
+    })
 )
 
 // Sanity checks

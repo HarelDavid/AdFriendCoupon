@@ -5,7 +5,6 @@ import admin from 'firebase-admin';
 // Spawn webpack as a separate process ( prevents pointless garbage collection in the same process )
 //-----------
 
-console.log(";;;",process.env.NODE_ENV)
 
 let webpackconfig = path.join(__dirname, '../../config/webpack.config.'+((process.env.NODE_ENV === 'production') ? 'prod' : 'dev'))
 require('child_process').spawn('node',[webpackconfig], { stdio: 'inherit' })

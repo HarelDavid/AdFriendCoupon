@@ -58,23 +58,11 @@ export default class CouponStore {
 
 	//add or update
 	save(coupon) {
-		if(!coupon.id){
-			var couponId = Utils.uuid();
-			coupon.id = couponId;
-			coupon.store = this;
-		}
-
-		var hostData = 'http://coupon.adfriend.co.il';
-		var linkData = `/coupon/${coupon.id}`;
-		var couponsLink = `${hostData}${linkData}`;
-		coupon.link = couponsLink;
-
-
-		if(!this.coupons.find(it => it.id == coupon.id)) {
-			this.coupons.push(coupon);
-		}
 		var couponDB = coupon.convertToDB();
-		firebase.database().ref('coupons').child(couponDB.id).set(couponDB);
+    	return Promise.all([
+    		firebase.database().ref('coupons').child(couponDB.id).child('realized').set(couponDB.realized),
+            firebase.database().ref('coupons').child(couponDB.id).child('watches').set(couponDB.watches)
+		])
 	}
 
 
