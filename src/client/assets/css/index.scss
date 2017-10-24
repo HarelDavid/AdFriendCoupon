@@ -25,28 +25,24 @@ body, html {
   text-align: center;
   //background: repeating-linear-gradient(45deg, #f5f1ee 10px, #f5f1ee 20px, #585D91 20px, #585D91 30px);
   background: white;
-  border: 2px dashed #ccc;
   position: relative;
   line-height: 1.6;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
   border-radius: 7px;
   box-shadow: 4px 4px 11px rgba(0, 0, 0, 0.15);
   .Coupon-inner {
-    background: white;
-    > div {
-      padding: 10px;
-    }
+    position: relative;
+    padding: 0 0 10px;
   }
   .Coupon-img {
-    max-height: 200px;
-    overflow: hidden;
-    img {
-      max-width: 100%;
-    }
+    margin-bottom: 20px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200px;
   }
   h1 {
     font-size: 24px;

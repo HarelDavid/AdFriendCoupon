@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import CouponModel from '../../models/CouponModel';
 import CouponStore from '../../stores/CouponStore';
-
+import * as Vibrant from 'node-vibrant'
 
 @observer(["coupon"]) // Only required if you use or change the state outside fetchData
 export default class Home extends React.Component {
@@ -16,9 +16,10 @@ export default class Home extends React.Component {
 	@observable
 	state = {
 		couponModel: null,
-		formOpen: false,
 		clientData: {},
-		wrongCode: false
+		wrongCode: false,
+		formSubmitted: false,
+		colorScheme: null
 	}
 
 	componentWillMount() {
@@ -38,7 +39,7 @@ export default class Home extends React.Component {
 			couponModel.save();
 		}
 
-
+		this.state.colorScheme = Vibrant.from(couponModel.offer.imageUrl).getPalette((err, palette) => console.log(palette));
 	}
 
 	getParameterByName(name, url) {
@@ -53,11 +54,14 @@ export default class Home extends React.Component {
 
 	@autobind
 	realizeCoupon() {
-
 		var {couponModel, clientData} = this.state;
+
+		this.state.formSubmitted = true;
+
+
 		couponModel.realized++;
-		couponModel.friends.push(clientData)
-		couponModel.save()
+		couponModel.friends.push(clientData);
+		couponModel.save();
 	}
 
 
@@ -78,7 +82,7 @@ export default class Home extends React.Component {
 	}
 
 	render() {
-		var {wrongCode, couponModel} = this.state,
+		var {wrongCode, couponModel, formSubmitted, colorScheme} = this.state,
 			business = couponModel.bussineData || {},
 			offer = couponModel.offer,
 			isOVerDue = moment(couponModel.offer.endingDate).isBefore(new Date()),
@@ -87,9 +91,10 @@ export default class Home extends React.Component {
 		console.log(this.props.coupon)
 		console.log(couponModel);
 
-		if(!couponModel) {
+		if (!couponModel) {
 			return null;
 		}
+		console.log(colorScheme)
 
 		if (isOVerDue) {
 			return <div className="Coupon">
@@ -97,12 +102,14 @@ export default class Home extends React.Component {
 				<p>ניתן לפנות ל{business.title} לפרטים נוספים {business.phone &&
 				<a href={telLink}>{business.phone}</a>}</p>
 			</div>
-		} else {
-			return <div className="Coupon">
-				<div className="Coupon-inner">
-					<div className="Coupon-img">
-						<img src={offer.imageUrl}/>
-					</div>
+		}
+
+		return <div className="Coupon">
+			<div className="Coupon-inner" style={{}}>
+
+				<div className="Coupon-img" style={{backgroundImage: `url(${offer.imageUrl})`}}>
+					{/*<img src={offer.imageUrl}/>*/}
+				</div>
 				<div>
 					<h1>{offer.title}</h1>
 					<p>{offer.description}</p>
@@ -123,19 +130,25 @@ export default class Home extends React.Component {
 				</div>
 				<div className="Coupon-realization">
 
-					<form>
-						<TextField name="clientName" onChange={this.onChange} hintText="שם"/>
-						<TextField name="phoneNumber" onChange={this.onChange} onBlur={this.checkPhone} hintText="מספר טלפון"/>
-						{wrongCode && <div>מספר טלפון לא תקין</div> }
-						<div className="form-button">
-							<RaisedButton secondary onClick={this.realizeCoupon}>שלח</RaisedButton>
+					{!formSubmitted ?
+
+						<form>
+							<TextField name="clientName" onChange={this.onChange} hintText="שם"/>
+							<TextField name="phoneNumber" onChange={this.onChange} onBlur={this.checkPhone}
+									   hintText="מספר טלפון"/>
+							{wrongCode && <div>מספר טלפון לא תקין</div> }
+							<div className="form-button">
+								<RaisedButton secondary onClick={this.realizeCoupon}>שלח</RaisedButton>
+							</div>
+						</form>
+						:
+
+						<div className="Coupon-success">
+							פרטיך נשלחו בהצלחה!
 						</div>
-					</form>
-
-
-				</div>
+					}
 				</div>
 			</div>
-		}
+		</div>
 	}
 }
