@@ -16,13 +16,15 @@ body, html {
 }
 
 #root {
+  padding: 15px;
 }
 
 .Coupon {
   width: 100%;
   max-width: 400px;
   text-align: center;
-  margin: auto;
+  //margin: auto;
+  padding: 15px;
   background: white;
   position: relative;
   line-height: 1.6;
@@ -46,7 +48,7 @@ body, html {
   }
 
   .Coupon-inner-details {
-    padding: 0 20px;
+    //padding: 0 20px;
   }
 
   h1 {
