@@ -14,52 +14,52 @@ import CouponStore from '../../stores/CouponStore';
 @observer(["coupon"]) // Only required if you use or change the state outside fetchData
 export default class Home extends React.Component {
 
-	@observable
-	state = {
-		couponModel: null,
-		formOpen: false,
-		clientData: {
+    @observable
+    state = {
+        couponModel: null,
+        formOpen: false,
+        clientData: {
             clientName:'',
             phoneNumber:''
-		},
+        },
         clientNameError: '',
         phoneError: ''
-	}
+    }
 
-	componentWillMount() {
+    componentWillMount() {
 
-		var {coupon} = this.props;
-		this.state.couponModel = new CouponModel();
-		this.state.couponModel.store = new CouponStore();
-		this.state.couponModel.convertFromDB(coupon);
-	}
+        var {coupon} = this.props;
+        this.state.couponModel = new CouponModel();
+        this.state.couponModel.store = new CouponStore();
+        this.state.couponModel.convertFromDB(coupon);
+    }
 
-	componentDidMount() {
-		var {couponModel} = this.state
-		var isPreview = this.getParameterByName('preview')
-		if (!Cookies.get(`watched_${couponModel.id}`) && !isPreview) {
-			Cookies.set(`watched_${couponModel.id}`, true)
-			couponModel.watches++;
-			couponModel.saveWatches();
-		}
+    componentDidMount() {
+        var {couponModel} = this.state
+        var isPreview = this.getParameterByName('preview')
+        if (!Cookies.get(`watched_${couponModel.id}`) && !isPreview) {
+            Cookies.set(`watched_${couponModel.id}`, true)
+            couponModel.watches++;
+            couponModel.saveWatches();
+        }
 
 
-	}
+    }
 
-	getParameterByName(name, url) {
-		if (!url) url = window.location.href;
-		name = name.replace(/[\[\]]/g, "\\$&");
-		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-			results = regex.exec(url);
-		if (!results) return null;
-		if (!results[2]) return '';
-		return decodeURIComponent(results[2].replace(/\+/g, " "));
-	}
+    getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
 
-	@autobind
-	realizeCoupon() {
+    @autobind
+    realizeCoupon() {
         var {couponModel, clientData} = this.state;
-		if(this.validateForm()) {
+        if(this.validateForm()) {
             couponModel.realized++;
             // couponModel.friends.push({
             //     clientName:clientData.clientName,
@@ -69,78 +69,78 @@ export default class Home extends React.Component {
                 clientName:clientData.clientName,
                 phoneNumber:clientData.phoneNumber
             });
-        	browserHistory.push("/thank-you")
+            browserHistory.push("/thank-you")
 
         }
-	}
+    }
 
     @autobind
     validateName() {
         var valid = true
-		if(!this.state.clientData['clientName'].trim()){
+        if(!this.state.clientData['clientName'].trim()){
             this.state.clientNameError = 'הזן שם'
             valid =  false
-		}
-		return valid
+        }
+        return valid
     }
 
     @autobind
     validatePhone() {
         var valid = true
-       const phone =  this.state.clientData['phoneNumber'];
-       if(!phone.trim()){
-           this.state.phoneError = 'הזן מספר טלפון'
-           valid =  false
-	   }
-       if(!phone.match(/^((\+972|972)|0)( |-)?([1-468-9]( |-)?\d{7}|(5|7)[0-9]( |-)?\d{7})$/)){
-		   this.state.phoneError = 'מספר הטלפון שגוי'
-           valid =  false
-	   }
+        const phone =  this.state.clientData['phoneNumber'];
+        if(!phone.trim()){
+            this.state.phoneError = 'הזן מספר טלפון'
+            valid =  false
+        }
+        if(!phone.match(/^((\+972|972)|0)( |-)?([1-468-9]( |-)?\d{7}|(5|7)[0-9]( |-)?\d{7})$/)){
+            this.state.phoneError = 'מספר הטלפון שגוי'
+            valid =  false
+        }
         return valid
-	}
+    }
 
-	validateForm(){
+    validateForm(){
         var valid = true
         valid = valid  && this.validatePhone()
         valid = valid  && this.validateName()
-		return valid
-	}
+        return valid
+    }
 
 
-	@autobind
-	onChange(event) {
-		this.updateProperty(event.target.name, event.target.value)
-	}
+    @autobind
+    onChange(event) {
+        this.updateProperty(event.target.name, event.target.value)
+    }
 
-	@autobind
-	updateProperty(key, value) {
-		var {clientData} = this.state;
-		clientData[key] = value;
-	}
+    @autobind
+    updateProperty(key, value) {
+        var {clientData} = this.state;
+        clientData[key] = value;
+    }
 
 
-	render() {
-		var { couponModel, clientNameError, phoneError} = this.state,
-			business = couponModel.bussineData || {},
-			offer = couponModel.offer,
-			isOVerDue = moment(couponModel.offer.endingDate).isBefore(new Date()),
-			telLink = 'tel:' + business.phone
+    render() {
+        var { couponModel, clientNameError, phoneError} = this.state,
+            business = couponModel.bussineData || {},
+            offer = couponModel.offer,
+            isOVerDue = moment(couponModel.offer.endingDate).isBefore(new Date()),
+            telLink = 'tel:' + business.phone
 
-		console.log(this.props.coupon)
-		console.log(couponModel);
+        console.log(this.props.coupon)
+        console.log(couponModel);
 
-		if(!couponModel) {
-			return null;
-		}
+        if(!couponModel) {
+            return null;
+        }
 
-		if (isOVerDue) {
-			return <div className="Coupon">
+        if (isOVerDue) {
+            return <div className="Coupon">
 				<p>ההצעה אינה בתוקף</p>
 				<p>ניתן לפנות ל{business.title} לפרטים נוספים {business.phone &&
 				<a href={telLink}>{business.phone}</a>}</p>
 			</div>
-		} else {
-			return <div className="Coupon">
+        } else {
+            return <div className="Coupon">
 				<div className="Coupon-inner">
 					<div className="Coupon-img">
 						<img src={offer.imageUrl}/>
@@ -150,34 +150,35 @@ export default class Home extends React.Component {
 						<p>{offer.description}</p>
 						<p>בתוקף עד: {moment(offer.endingDate).format('DD/MM/YY')}</p>
 						<div className="terms">* {offer.terms}</div>
-
-				<div className="business-details">
-					<div className="details-row">
-						<p>{business.title}</p>
-						<p>{business.description}</p>
-						<p>{business.address}</p>
 					</div>
-					<div className="details-row">
-						<p><a href={telLink}>{business.phone}</a></p>
-						<p><a href={business.website} target="_blank">{business.website}</a></p>
-					</div>
-				</div>
-				<div className="Coupon-realization">
 
-					<form>
-						<TextField name="clientName" onChange={this.onChange} onFocus={() => {this.state.clientNameError = ''}} onBlur={this.validateName}  hintText="שם"/>
-						<div>{clientNameError}</div>
-						<TextField name="phoneNumber" onChange={this.onChange} onFocus={() => {this.state.phoneError = ''}}  onBlur={this.validatePhone} hintText="מספר טלפון"/>
-						 <div>{phoneError}</div>
-						<div className="form-button">
-							<RaisedButton secondary onClick={this.realizeCoupon}>שלח</RaisedButton>
+					<div className="business-details">
+						<div className="details-row">
+							<p>{business.title}</p>
+							<p>{business.description}</p>
+							<p>{business.address}</p>
 						</div>
-					</form>
+						<div className="details-row">
+							<p><a href={telLink}>{business.phone}</a></p>
+							<p><a href={business.website} target="_blank">{business.website}</a></p>
+						</div>
+					</div>
+					<div className="Coupon-realization">
+
+						<form>
+							<TextField name="clientName" onChange={this.onChange} onFocus={() => {this.state.clientNameError = ''}} onBlur={this.validateName}  hintText="שם"/>
+							<div>{clientNameError}</div>
+							<TextField name="phoneNumber" onChange={this.onChange} onFocus={() => {this.state.phoneError = ''}}  onBlur={this.validatePhone} hintText="מספר טלפון"/>
+							<div>{phoneError}</div>
+							<div className="form-button">
+								<RaisedButton secondary onClick={this.realizeCoupon}>שלח</RaisedButton>
+							</div>
+						</form>
 
 
-				</div>
+					</div>
 				</div>
 			</div>
-		}
-	}
+        }
+    }
 }
