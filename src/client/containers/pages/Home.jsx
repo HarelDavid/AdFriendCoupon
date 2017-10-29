@@ -145,12 +145,11 @@ export default class Home extends React.Component {
 					<div className="Coupon-img">
 						<img src={offer.imageUrl}/>
 					</div>
-				<div>
-					<h1>{offer.title}</h1>
-					<p>{offer.description}</p>
-					<p>בתוקף עד: {moment(offer.endingDate).format('DD/MM/YY')}</p>
-					<div className="terms">* {offer.terms}</div>
-				</div>
+					<div className="Coupon-inner-details">
+						<h1>{offer.title}</h1>
+						<p>{offer.description}</p>
+						<p>בתוקף עד: {moment(offer.endingDate).format('DD/MM/YY')}</p>
+						<div className="terms">* {offer.terms}</div>
 
 				<div className="business-details">
 					<div className="details-row">

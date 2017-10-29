@@ -16,38 +16,39 @@ body, html {
 }
 
 #root {
-  padding: 15px;
 }
 
 .Coupon {
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   text-align: center;
-  //background: repeating-linear-gradient(45deg, #f5f1ee 10px, #f5f1ee 20px, #585D91 20px, #585D91 30px);
+  margin: auto;
   background: white;
-  border: 2px dashed #ccc;
   position: relative;
   line-height: 1.6;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
   border-radius: 7px;
   box-shadow: 4px 4px 11px rgba(0, 0, 0, 0.15);
   .Coupon-inner {
-    background: white;
-    > div {
-      padding: 10px;
-    }
+    position: relative;
+    padding: 0 0 10px;
+    width: 100%;
   }
   .Coupon-img {
-    max-height: 200px;
-    overflow: hidden;
+    margin-bottom: 20px;
+    width: 100%;
     img {
-      max-width: 100%;
+      width: 100%;
     }
   }
+
+  .Coupon-inner-details {
+    padding: 0 20px;
+  }
+
   h1 {
     font-size: 24px;
   }
