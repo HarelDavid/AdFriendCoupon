@@ -16,15 +16,13 @@ body, html {
 }
 
 #root {
-  padding: 15px;
 }
 
 .Coupon {
   width: 100%;
+  min-height: 100vh;
   max-width: 400px;
-  text-align: center;
-  //margin: auto;
-  padding: 15px;
+  margin: auto;
   background: white;
   position: relative;
   line-height: 1.6;
@@ -32,13 +30,8 @@ body, html {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border-radius: 7px;
   box-shadow: 4px 4px 11px rgba(0, 0, 0, 0.15);
-  .Coupon-inner {
-    position: relative;
-    padding: 0 0 10px;
-    width: 100%;
-  }
+  color: #313131;
   .Coupon-img {
     margin-bottom: 20px;
     width: 100%;
@@ -48,12 +41,24 @@ body, html {
   }
 
   .Coupon-inner-details {
-    //padding: 0 20px;
+    text-align: right;
+    padding: 0 15px;
+    width: 90%;
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+    padding: 0 15px;
   }
+  h2 {
+    padding: 0 15px 20px;
+    text-align: right;
+    font-weight: bold;
+    color: #555;
+  }
+
   form {
     > div {
       width: 100% !important;
@@ -74,14 +79,14 @@ body, html {
   p {
     margin: 10px 0;
     font-size: 16px;
+    text-align: right;
   }
   .business-details {
     font-size: 14px;
     line-height: 1;
     width: 90%;
     margin: 0 auto;
-    border: 1px #ccc dotted;
-    border-width: 1px 0 1px 0px;
+    padding: 0 15px;
     .details-row {
       margin-bottom: 15px;
     }
