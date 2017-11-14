@@ -127,9 +127,12 @@ export default class Home extends React.Component {
 			offer = couponModel.offer,
 			isOVerDue = moment(couponModel.offer.endingDate).isBefore(new Date()),
 			telLink = 'tel:' + business.phone
-
-		console.log(this.props.coupon)
-		console.log(couponModel);
+		let iconStyles = {
+			fontSize: 18,
+			color: '#555',
+			verticalAlign: 'middle',
+			marginRight: 10
+		}
 
 		if (!couponModel) {
 			return null;
@@ -145,33 +148,36 @@ export default class Home extends React.Component {
 			return <div className="Coupon">
 				<div className="Coupon-img">
 					<img src={offer.imageUrl}/>
+					<div className="business-title">
+						<p>{business.title}</p>
+						<p>{business.description}</p>
+					</div>
 				</div>
-				<h1>{offer.title}</h1>
-				<h2>{offer.description}</h2>
+				<svg id="curveDownColor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+					<path d="M0 0 C 50 100 80 100 100 0 Z"/>
+				</svg>
+				<div className="Coupon-title">
+					<h1>{offer.title}</h1>
+					<h2>{offer.description}</h2>
+				</div>
 				<Paper className="Coupon-inner-details">
-					<p><FontIcon className="material-icons"
-								 style={{
-									 color: '#313131',
-									 fontSize: 16,
-									 marginLeft: 4,
-									 verticalAlign: 'sub'
-								 }}>share</FontIcon> בתוקף עד: {moment(offer.endingDate).format('DD/MM/YY')}</p>
+					<p><FontIcon className="material-icons" style={iconStyles}>date_range</FontIcon>
+						בתוקף עד: {moment(offer.endingDate).format('DD/MM/YY')}</p>
 				</Paper>
 				{offer.terms && <div className="terms">* {offer.terms}</div>}
 
 				<Paper className="business-details">
 					<div className="details-row">
-						<p>{business.title}</p>
-						<p>{business.description}</p>
-						<p>{business.address}</p>
-					</div>
-					<div className="details-row">
-						<p><a href={telLink}>{business.phone}</a></p>
-						<p><a href={business.website} target="_blank">{business.website}</a></p>
+						<p><FontIcon className="material-icons" style={iconStyles}>smartphone</FontIcon>
+							<a href={telLink}>{business.phone}</a></p>
+						<p><FontIcon className="material-icons"
+									 style={iconStyles}>location_on</FontIcon>{business.address}</p>
+						<p><FontIcon className="material-icons" style={iconStyles}>link</FontIcon>
+							<a href={business.website} target="_blank">{business.website}</a></p>
 					</div>
 				</Paper>
 				<div className="Coupon-realization">
-					<p>הרשמו לקבלת ההטבה:</p>
+					<p>מעדיף שנחזור אליך? השאר פרטים כאן:</p>
 					<form>
 						<TextField name="clientName" onChange={this.onChange} onFocus={() => {
 							this.state.clientNameError = ''

@@ -35,6 +35,8 @@ export default class Html extends React.Component {
                         <meta name="google-site-verification" content="hY_sgqpJL9GEXDQSwGV5TOasEVKWf5-l7DnqnveJO9o" />
                         <link href={devServerURL + '/bundle.css'} rel="stylesheet"/>
                         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+                        <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet"/>
+                        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
                         <script dangerouslySetInnerHTML={{__html: injected_state}}/>
                     </head>
                     <body>
