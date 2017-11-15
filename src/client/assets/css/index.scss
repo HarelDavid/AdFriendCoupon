@@ -1,3 +1,24 @@
+@keyframes slideIn {
+  from { max-height: 0}
+  to {max-height: 240px}
+}
+
+@keyframes fadeIn {
+  from {  opacity: 0;  }
+  to { opacity: 1;  }
+}
+
+@mixin listAnimationDelay($value) {
+  @for $i from 1 through 50 {
+    &:nth-of-type(#{$i}) {
+      animation-delay: #{$value * $i}ms;
+    }
+  }
+}
+
+$media-higher-than-mobile: "only screen and (min-width : 920px)";
+
+/////////****************//////////////
 
 * {
   box-sizing: border-box;
@@ -35,10 +56,15 @@ body, html {
   .Coupon-img {
     width: 100%;
     position: relative;
-    max-height: 240px;
     overflow: hidden;
+    max-height: 0;
+    animation: slideIn 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.5s forwards;
     img {
       width: 100%;
+      clip-path: circle(169% at 34% -118%);
+      @media #{$media-higher-than-mobile} {
+        clip-path: circle(164% at 34% -118%);
+      }
     }
     .business-title {
       position: absolute;
@@ -53,7 +79,7 @@ body, html {
     }
     &:after {
       content: "";
-      background: linear-gradient(rgba(0,0,0,.8) -30%,rgba(0,0,0,0));
+      background: linear-gradient(rgba(0,0,0,.8) -30%,rgba(0,0,0,0) 80%);
       width: 100%;
       height: 100%;
       left: 0;
@@ -123,10 +149,44 @@ body, html {
     }
   }
 
+  .terms-link {
+    color: #555;
+    text-align: left;
+    float: right;
+    font-size: 10px;
+  }
+
   .terms {
     font-size: 10px;
     text-align: right;
     padding: 20px 17px 20px 15px;
     width: 100%;
   }
+
+  .fadeInAnimation {
+    opacity: 0;
+    transform: translate3d(0, -7px, 0);
+    animation: fadeIn 0.3s ease-in 0.6s forwards;
+    //@include listAnimationDelay(60);
+
+  }
 }
+
+.Terms-page {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 15px;
+  > div {
+    padding: 15px;
+  }
+  ul {
+    list-style-position: inside;
+  }
+  p {
+    line-height: 1.3;
+  }
+  h4 {
+    margin-top: 10px;
+  }
+}
+

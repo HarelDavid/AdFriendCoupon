@@ -11,7 +11,7 @@ import CouponModel from '../../models/CouponModel';
 import CouponStore from '../../stores/CouponStore';
 import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
-
+import Link from 'react-router/lib/Link'
 
 @observer(["coupon"]) // Only required if you use or change the state outside fetchData
 export default class Home extends React.Component {
@@ -133,6 +133,7 @@ export default class Home extends React.Component {
 			verticalAlign: 'middle',
 			marginRight: 10
 		}
+		let mapLink = 'https://maps.google.com/?q=' + business.address
 
 		if (!couponModel) {
 			return null;
@@ -153,30 +154,29 @@ export default class Home extends React.Component {
 						<p>{business.description}</p>
 					</div>
 				</div>
-				<svg id="curveDownColor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
-					<path d="M0 0 C 50 100 80 100 100 0 Z"/>
-				</svg>
-				<div className="Coupon-title">
+				<div className="Coupon-title fadeInAnimation">
 					<h1>{offer.title}</h1>
 					<h2>{offer.description}</h2>
 				</div>
-				<Paper className="Coupon-inner-details">
+				<Paper className="Coupon-inner-details fadeInAnimation">
 					<p><FontIcon className="material-icons" style={iconStyles}>date_range</FontIcon>
 						בתוקף עד: {moment(offer.endingDate).format('DD/MM/YY')}</p>
 				</Paper>
-				{offer.terms && <div className="terms">* {offer.terms}</div>}
+				{offer.terms && <div className="terms fadeInAnimation">* {offer.terms}</div>}
 
-				<Paper className="business-details">
+				<Paper className="business-details fadeInAnimation">
 					<div className="details-row">
 						<p><FontIcon className="material-icons" style={iconStyles}>smartphone</FontIcon>
 							<a href={telLink}>{business.phone}</a></p>
 						<p><FontIcon className="material-icons"
-									 style={iconStyles}>location_on</FontIcon>{business.address}</p>
+									 style={iconStyles}>location_on</FontIcon>
+							<a href={mapLink} target="_blank">
+								{business.address}</a></p>
 						<p><FontIcon className="material-icons" style={iconStyles}>link</FontIcon>
 							<a href={business.website} target="_blank">{business.website}</a></p>
 					</div>
 				</Paper>
-				<div className="Coupon-realization">
+				<div className="Coupon-realization fadeInAnimation">
 					<p>מעדיף שנחזור אליך? השאר פרטים כאן:</p>
 					<form>
 						<TextField name="clientName" onChange={this.onChange} onFocus={() => {
@@ -192,7 +192,7 @@ export default class Home extends React.Component {
 						</div>
 					</form>
 
-
+					<Link to="/terms" target="_blank" className="terms-link">כפוף לתנאי השימוש</Link>
 				</div>
 			</div>
 		}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router'
+import {Route} from 'react-router'
 import App from './containers/App.jsx'
 
 /**
@@ -8,9 +8,9 @@ import App from './containers/App.jsx'
  * @returns {Function}
  */
 function requireAsync(main) {
-    return function(location, next) {
-        next(null, require('./containers/pages/' + main + '.jsx'))
-    }
+	return function (location, next) {
+		next(null, require('./containers/pages/' + main + '.jsx'))
+	}
 }
 
 /**
@@ -20,9 +20,10 @@ function requireAsync(main) {
  * @returns {Object}
  */
 export default function createRoutes() {
-    return (<Route component={App}>
-                <Route path="coupon/:couponId"      getComponent={requireAsync('Home')}/>
-                <Route path="thank-you"      getComponent={requireAsync('ThankYou')}/>
-                <Route path="*"      getComponent={requireAsync('NotFound')}/>
-            </Route>)
+	return (<Route component={App}>
+		<Route path="coupon/:couponId" getComponent={requireAsync('Home')}/>
+		<Route path="thank-you" getComponent={requireAsync('ThankYou')}/>
+		<Route path="terms" getComponent={requireAsync('Terms')}/>
+		<Route path="*" getComponent={requireAsync('NotFound')}/>
+	</Route>)
 }
