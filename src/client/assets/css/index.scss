@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Assistant:400,700');
+
 @keyframes slideIn {
   from { max-height: 0}
   to {max-height: 240px}
@@ -34,7 +36,7 @@ body, html {
   background: #f5f1ee;
   direction: rtl;
   color: #555;
-  font-family: 'Arimo', sans-serif;
+  font-family: 'Assistant', sans-serif;
 }
 
 #root {
@@ -68,13 +70,17 @@ body, html {
     }
     .business-title {
       position: absolute;
-      top: 15px;
-      right: 20px;
+      top: 0;
+      right: 0;
+      padding: 15px;
       z-index: 1;
       p {
         color: #fff;
         font-size: 18px;
         margin: 0;
+        &:last-of-type {
+          font-size: 15px;
+        }
       }
     }
     &:after {
