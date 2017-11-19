@@ -162,7 +162,7 @@ export default class Home extends React.Component {
 					<p><FontIcon className="material-icons" style={iconStyles}>date_range</FontIcon>
 						בתוקף עד: {moment(offer.endingDate).format('DD/MM/YY')}</p>
 				</Paper>
-				{offer.terms && <div className="terms fadeInAnimation">* {offer.terms}</div>}
+				 <div className="terms fadeInAnimation">{offer.terms ? ('* '+ offer.terms) : null}</div>
 
 				<Paper className="business-details fadeInAnimation">
 					<div className="details-row">
