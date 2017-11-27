@@ -177,7 +177,7 @@ export default class Home extends React.Component {
 					</div>
 				</Paper>
 				<div className="Coupon-realization fadeInAnimation">
-					<p>מעדיף שנחזור אליך? השאר פרטים כאן:</p>
+					<p>מעדיפים שנחזור אליכם? השאירו פרטים כאן:</p>
 					<form>
 						<TextField name="clientName" onChange={this.onChange} onFocus={() => {
 							this.state.clientNameError = ''
