@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Assistant:400,700');
 
 @keyframes slideIn {
-  from { max-height: 0}
-  to {max-height: 240px}
+  from { max-height: 0; overflow: hidden; }
+  to {max-height: 240px; overflow: visible; }
 }
 
 @keyframes fadeIn {
