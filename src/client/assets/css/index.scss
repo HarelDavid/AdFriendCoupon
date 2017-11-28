@@ -42,6 +42,8 @@ body, html {
 #root {
 }
 
+
+
 .Coupon {
   width: 100%;
   min-height: 100vh;
@@ -55,6 +57,15 @@ body, html {
   justify-content: space-between;
   align-items: center;
   box-shadow: 4px 4px 11px rgba(0, 0, 0, 0.15);
+
+  &.Coupon-expired {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    padding-top: 170px;
+
+  }
+
   .Coupon-img {
     width: 100%;
     position: relative;
