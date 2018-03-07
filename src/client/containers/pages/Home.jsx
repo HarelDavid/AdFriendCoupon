@@ -219,7 +219,7 @@ export default class Home extends React.Component {
                                 {business.address}</a></p>}
                         {business.website &&
                         <p><FontIcon className="material-icons" style={iconStyles}>link</FontIcon>
-                            <a href={business.website} target="_blank">{business.website}</a></p>}
+                            <a href={business.website} target="_blank">לאתר</a></p>}
                     </div>
                 </Paper>
 
