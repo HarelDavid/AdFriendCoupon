@@ -1,13 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Assistant:400,700');
 
 @keyframes slideIn {
-  from { max-height: 0; overflow: hidden; }
-  to {max-height: 240px; overflow: visible; }
+  from {
+    max-height: 0;
+    overflow: hidden;
+  }
+  to {
+    max-height: 240px;
+    overflow: visible;
+  }
 }
 
 @keyframes fadeIn {
-  from {  opacity: 0;  }
-  to { opacity: 1;  }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @mixin listAnimationDelay($value) {
@@ -18,7 +28,38 @@
   }
 }
 
+@keyframes fadeFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleDownX {
+  from {
+    transform: scaleX(1)
+  }
+
+  to {
+    transform: scaleX(0)
+  }
+}
+
 $media-higher-than-mobile: "only screen and (min-width : 920px)";
+$primary: '#585D91';
+$secondary: '#50BAB';
+
+$font: #313131;
+$grey-dark: #7F7F7F;
+$grey-medium: #979797;
+$grey-medium-light: #A8A8A8;
+$grey-light: #E4E4E4;
+$grey-bg: #f7f7f7;
 
 /////////****************//////////////
 
@@ -42,9 +83,9 @@ body, html {
 #root {
 }
 
+//Template
 
-
-.Coupon {
+.Template {
   width: 100%;
   min-height: 100vh;
   max-width: 400px;
@@ -57,6 +98,29 @@ body, html {
   justify-content: space-between;
   align-items: center;
   box-shadow: 4px 4px 11px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  border: 8px solid $grey-light;
+
+  .row {
+    display: flex;
+    flex-direction: column-reverse;
+    label {
+      opacity: 0;
+      transition: opacity ease 0.2s;
+      color: $secondary;
+      font-size: 16px;
+      font-weight: 400;
+    }
+    textarea {
+      &:focus {
+        outline-color: $secondary;
+        border: 1px solid $grey-light;
+        + label {
+          opacity: 1;
+        }
+      }
+    }
+  }
 
   &.Coupon-expired {
     display: flex;
@@ -69,22 +133,20 @@ body, html {
   .Coupon-img {
     width: 100%;
     position: relative;
+    max-height: 250px;
     overflow: hidden;
-    max-height: 0;
-    animation: slideIn 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.5s forwards;
+    clip-path: circle(169% at 34% -118%);
     img {
       width: 100%;
-      clip-path: circle(169% at 34% -118%);
-      @media #{$media-higher-than-mobile} {
-        clip-path: circle(164% at 34% -118%);
-      }
+      position: relative;
     }
+
     .business-title {
       position: absolute;
       top: 0;
       right: 0;
       padding: 15px;
-      z-index: 1;
+      z-index: 3;
       p {
         color: #fff;
         font-size: 18px;
@@ -96,7 +158,7 @@ body, html {
     }
     &:after {
       content: "";
-      background: linear-gradient(rgba(0,0,0,.8) -30%,rgba(0,0,0,0) 80%);
+      background: linear-gradient(rgba(0,0,0,.8) -30%, rgba(0, 0, 0, 0) 80%);
       width: 100%;
       height: 100%;
       left: 0;
@@ -109,12 +171,22 @@ body, html {
     text-align: right;
     padding: 0 15px;
     width: calc(100% - 30px);
+    margin: 0 auto;
+    overflow: hidden;
+    .row {
+      flex-direction: row;
+      align-items: center;
+      overflow: hidden;
+      .betokef {
+        white-space: nowrap;
+        padding-left: 5px;
+      }
+    }
   }
-
 
   .Coupon-title {
     width: 100%;
-    padding: 15px;
+    padding: 0 15px;
     h1 {
       font-size: 24px;
       font-weight: bold;
@@ -126,7 +198,6 @@ body, html {
       font-size: 16px;
       font-weight: 500;
     }
-
   }
 
   form {
@@ -138,7 +209,7 @@ body, html {
     width: 100%;
     padding: 10px 20px;
     text-align: left;
-
+    position: relative;
   }
   .form-button {
     text-align: left;
@@ -162,7 +233,6 @@ body, html {
       a {
         color: #50BAB4;
         text-decoration: underline;
-        word-break: break-all;
       }
     }
   }
@@ -184,11 +254,208 @@ body, html {
   .fadeInAnimation {
     opacity: 0;
     transform: translate3d(0, -7px, 0);
-    animation: fadeIn 0.3s ease-in 0.6s forwards;
+    animation: fadeIn 0.6s ease-in 0.6s forwards;
     //@include listAnimationDelay(60);
 
   }
 }
+
+//templates types
+.Template {
+
+  &.template-0 {
+    .Coupon-img {
+      overflow: hidden;
+      max-height: 0;
+      animation: slideIn 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.5s forwards;
+      img, .no-image, canvas {
+        clip-path: circle(169% at 34% -118%);
+        @media #{$media-higher-than-mobile} {
+          clip-path: circle(164% at 34% -118%);
+        }
+      }
+    }
+  }
+
+  //Business card
+  &.template-1 {
+    .business-title {
+      opacity: 0;
+      animation: fadeFromBottom 0.6s cubic-bezier(0.65, 0.05, 0.36, 1) 0.2s both
+    }
+    .Coupon-img {
+      max-height: 180px;
+      overflow: hidden;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        z-index: 1;
+        transform: scaleX(1);
+        transform-origin: left;
+        animation: scaleDownX 0.5s cubic-bezier(.645, .045, .355, 1) 0.5s both
+      }
+      &:after {
+        background: none;
+      }
+    }
+
+  }
+
+}
+
+//End global
+
+//
+//.Coupon {
+//  width: 100%;
+//  min-height: 100vh;
+//  max-width: 400px;
+//  margin: auto;
+//  background: white;
+//  position: relative;
+//  line-height: 1.6;
+//  display: flex;
+//  flex-direction: column;
+//  justify-content: space-between;
+//  align-items: center;
+//  box-shadow: 4px 4px 11px rgba(0, 0, 0, 0.15);
+//
+//  &.Coupon-expired {
+//    display: flex;
+//    justify-content: flex-start;
+//    align-content: center;
+//    padding-top: 170px;
+//
+//  }
+//
+//  .Coupon-img {
+//    width: 100%;
+//    position: relative;
+//    overflow: hidden;
+//    max-height: 0;
+//    animation: slideIn 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.5s forwards;
+//    img {
+//      width: 100%;
+//      clip-path: circle(169% at 34% -118%);
+//      @media #{$media-higher-than-mobile} {
+//        clip-path: circle(164% at 34% -118%);
+//      }
+//    }
+//    .business-title {
+//      position: absolute;
+//      top: 0;
+//      right: 0;
+//      padding: 15px;
+//      z-index: 1;
+//      p {
+//        color: #fff;
+//        font-size: 18px;
+//        margin: 0;
+//        &:last-of-type {
+//          font-size: 15px;
+//        }
+//      }
+//    }
+//    &:after {
+//      content: "";
+//      background: linear-gradient(rgba(0,0,0,.8) -30%,rgba(0,0,0,0) 80%);
+//      width: 100%;
+//      height: 100%;
+//      left: 0;
+//      top: 0;
+//      position: absolute;
+//    }
+//  }
+//
+//  .Coupon-inner-details {
+//    text-align: right;
+//    padding: 0 15px;
+//    width: calc(100% - 30px);
+//  }
+//
+//
+//  .Coupon-title {
+//    width: 100%;
+//    padding: 15px;
+//    h1 {
+//      font-size: 24px;
+//      font-weight: bold;
+//      text-align: right;
+//    }
+//    h2 {
+//      text-align: right;
+//      color: #555;
+//      font-size: 16px;
+//      font-weight: 500;
+//    }
+//
+//  }
+//
+//  form {
+//    > div {
+//      width: 100% !important;
+//    }
+//  }
+//  .Coupon-realization {
+//    width: 100%;
+//    padding: 10px 20px;
+//    text-align: left;
+//
+//  }
+//  .form-button {
+//    text-align: left;
+//  }
+//  button {
+//    color: #fff;
+//  }
+//  p {
+//    margin: 10px 0;
+//    font-size: 14px;
+//    text-align: right;
+//  }
+//  .business-details {
+//    font-size: 14px;
+//    line-height: 1;
+//    width: calc(100% - 30px);
+//    margin: 0 auto;
+//    padding: 5px 10px;
+//    p {
+//      margin: 8px 0;
+//      a {
+//        color: #50BAB4;
+//        text-decoration: underline;
+//        word-break: break-all;
+//      }
+//    }
+//  }
+//
+//  .terms-link {
+//    color: #555;
+//    text-align: left;
+//    float: right;
+//    font-size: 10px;
+//  }
+//
+//  .terms {
+//    font-size: 10px;
+//    text-align: right;
+//    padding: 20px 17px 20px 15px;
+//    width: 100%;
+//  }
+//
+//  .fadeInAnimation {
+//    opacity: 0;
+//    transform: translate3d(0, -7px, 0);
+//    animation: fadeIn 0.3s ease-in 0.6s forwards;
+//    //@include listAnimationDelay(60);
+//
+//  }
+//}
 
 .Terms-page {
   max-width: 1000px;
