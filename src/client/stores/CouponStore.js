@@ -15,7 +15,7 @@ export default class CouponStore {
 	init(){
 		this.couponRef = firebase.database().ref('coupons');
 	}
-	// Find all dinosaurs whose height is exactly 25 meters.
+
 
 
 	getCouponsByOfferId(offerId){
@@ -43,8 +43,8 @@ export default class CouponStore {
 
 	getCoupon(id){
 		return firebase.database().ref('/coupons/' + id).once('value').then((snapshot) => {
+			console.log(snapshot, snapshot.key);
 			var coupon  = snapshot.val();
-
 				var couponModel = new CouponModel();
 				couponModel.convertFromDB(coupon);
 				couponModel.store = this;
@@ -81,7 +81,10 @@ export default class CouponStore {
     }
 
     saveWatches(coupon){
+
         return this.getCoupon(coupon.id).then((coupon) => {
+            console.log(coupon);
+
             coupon.watches++
             firebase.database().ref('coupons').child(coupon.id).child('watches').set(coupon.watches)
         })

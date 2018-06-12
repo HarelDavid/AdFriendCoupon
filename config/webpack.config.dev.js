@@ -5,7 +5,11 @@ const config = require('./webpack.config.base.js')
 // Merge with base configuration
 //-------------------------------
 _.merge(config, {
-    cache: false
+    cache: false,
+    devtool: 'source-map',
+    devServer: {
+        hot: true,
+    },
 })
 
 delete config.output.libraryTarget

@@ -42,7 +42,8 @@ export default class Home extends React.Component {
 
     componentDidMount() {
         var {couponModel} = this.state
-        var isPreview = this.getParameterByName('preview')
+        var isPreview = this.getParameterByName('preview');
+
         if (!Cookies.get(`watched_${couponModel.id}`) && !isPreview) {
             Cookies.set(`watched_${couponModel.id}`, true)
             couponModel.watches++;
@@ -147,7 +148,6 @@ export default class Home extends React.Component {
             templateClass = classNames('Template', 'template-' + offer.templateId),
             termsDefaultValue = offer.terms ? ('*' + offer.terms) : null;
 
-        console.log(offer);
 
 
         if (isOVerDue) {
@@ -179,7 +179,7 @@ export default class Home extends React.Component {
 
             return <div className={templateClass}>
                 <div className="Coupon-img">
-                    <img src={offer.imageUrl}/>
+                    {offer.imageUrl ? <img src={offer.imageUrl}/> : <div className="no-image"/>}
                     {!isCallingCard &&
                     <div className="business-title">
                         <p>{business.title}</p>

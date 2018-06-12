@@ -167,6 +167,23 @@ body, html {
     }
   }
 
+  .no-image {
+    width: 100%;
+    height: 250px;
+    background-color:#556;
+    background-image: linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+    linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+    linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+    linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+    linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a),
+    linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);
+    background-size:80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    position: relative;
+    z-index: 1;
+  }
+
+
   .Coupon-inner-details {
     text-align: right;
     padding: 0 15px;
@@ -267,7 +284,9 @@ body, html {
     .Coupon-img {
       overflow: hidden;
       max-height: 0;
-      animation: slideIn 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.5s forwards;
+      :local {
+        animation: slideIn 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.5s forwards;
+      }
       img, .no-image, canvas {
         clip-path: circle(169% at 34% -118%);
         @media #{$media-higher-than-mobile} {
@@ -281,7 +300,9 @@ body, html {
   &.template-1 {
     .business-title {
       opacity: 0;
-      animation: fadeFromBottom 0.6s cubic-bezier(0.65, 0.05, 0.36, 1) 0.2s both
+      :local {
+        animation: fadeFromBottom 0.6s cubic-bezier(0.65, 0.05, 0.36, 1) 0.2s both
+      }
     }
     .Coupon-img {
       max-height: 180px;
@@ -297,7 +318,9 @@ body, html {
         z-index: 1;
         transform: scaleX(1);
         transform-origin: left;
-        animation: scaleDownX 0.5s cubic-bezier(.645, .045, .355, 1) 0.5s both
+        :local {
+          animation: scaleDownX 0.5s cubic-bezier(.645, .045, .355, 1) 0.5s both
+        }
       }
       &:after {
         background: none;
